@@ -18,6 +18,7 @@ local plugs = {
 }
 
 -- The most basic languages we want to support
+-- NOTE: Some TreeSitter parsers depend on others to work properly
 local lang_base = {
   "c",
   "lua",

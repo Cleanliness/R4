@@ -1,5 +1,4 @@
 -- Entry point on nvim startup if you forgor
-
 -- Pre setup things
 require('plugins.ui.filetree').pre()
 
@@ -9,7 +8,7 @@ require('core.options')
 ------------------------------------------------------
 --                  init Lazy.nvim 
 ------------------------------------------------------
--- concat lazy.nvim to stdpath
+-- this concats lazy.nvim to stdpath
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then     -- first time clone
   vim.fn.system {
@@ -35,18 +34,22 @@ require('lazy').setup({
   {"nvim-tree/nvim-web-devicons"},
 
   ---------------- Everything else --------------------
+  -- 
   require('plugins.telescope').plugs,      -- fuzzy finder
   require('plugins.treesitter').plugs,     -- highlighting and more 
   require('plugins.lsp').plugs,            -- all LSP stuff
   require('plugins.cmp').plugs,            -- completion
 
   -- AI
-  require('plugins.gpt.copilot').plugs,    -- AI completion
+  require('plugins.gpt.sg').plugs,         -- AI completion
 
   -- UI
   require('plugins.ui.lualine').plugs,     -- statusline
   require('plugins.ui.filetree').plugs,    -- file explorer
   require('plugins.ui.outline').plugs,     -- code outline
+
+  -- QOL
+  require('plugins.swenv').plugs,          -- switch python environments
 }, {})
 
 ------------------------------------------------------
@@ -54,12 +57,14 @@ require('lazy').setup({
 ------------------------------------------------------
 -- At this point, all plugins are loaded/built 
 -- and you can now configure them
-
 vim.cmd [[ colorscheme minilight ]]
+
 require('plugins.lsp').config()
 require('plugins.ui.filetree').config()
 require('plugins.cmp').config()
-require('plugins.gpt.copilot').config()
+require('plugins.gpt.sg').config()
+require('plugins.swenv').config()
+require('plugins.telescope').config()
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -71,34 +76,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
-
--- See `:help telescope.builtin`
-local builtin = require('telescope.builtin')
-
-vim.keymap.set('n', '<leader><space>', builtin.live_grep, {desc = 'Live grep in working directory'})
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer' })
 
 -- Configure treesitter
 require('plugins.treesitter').TSconfig()

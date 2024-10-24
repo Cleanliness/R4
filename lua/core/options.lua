@@ -1,7 +1,9 @@
 -- See `:help vim.o`
 local opt = vim.opt
+local wo = vim.wo
 local g = vim.g
 
+---------------------- General ----------------------
 opt.colorcolumn    = '+1'
 opt.cursorlineopt  = 'number'
 opt.cursorline     = true
@@ -29,7 +31,7 @@ opt.autowriteall   = true
 opt.virtualedit    = 'block'
 opt.completeopt    = 'menuone'
 
-vim.wo.number = true                    -- Make line numbers default
+wo.number = true                    -- Make line numbers default
 opt.hlsearch = false                    -- Set highlight on search
 opt.mouse = 'a'                         -- Enable mouse mode
 opt.clipboard = 'unnamedplus'           -- Sync clipboard between OS and Neovim.
@@ -49,19 +51,18 @@ opt.timeoutlen = 400
 opt.completeopt = 'menuone,noselect'    -- Set completeopt to have a better completion experience
 opt.termguicolors = true                -- NOTE: You should make sure your terminal supports this
 
--- change working directory on vex
--- opt.autochdir = true
+-- tab and space
+opt.tabstop = 4
+opt.shiftwidth = 4
 
 -- Leader to space
 g.mapleader = " "
 
 ---------------------- Neovide ----------------------
-if vim.g.neovide then
-    -- https://neovide.dev/configuration.html
-    vim.g.neovide_scale_factor = 0.70
-    vim.g.neovide_scroll_animation_length = 0.15
-    vim.g.neovide_cursor_animation_length = 0.05
-end
+-- https://neovide.dev/configuration.html
+vim.g.neovide_scale_factor = 0.70
+vim.g.neovide_scroll_animation_length = 0.15
+vim.g.neovide_cursor_animation_length = 0.05
 
 --------------------- clipboard ---------------------
 

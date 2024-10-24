@@ -1,5 +1,5 @@
 apply:
 	rm -rf ~/.config/nvim
-	cp -r ../r4k ~/.config/nvim
+	cp -r ../R4 ~/.config/nvim
 
 

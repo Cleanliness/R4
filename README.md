@@ -27,8 +27,9 @@ sh install.sh
 ## Post-install setup
 Things that need to be done after running the install script.
 
-### Copilot
-`:Copilot setup`, then follow the instructions.
+### LM completions
+
+
 
 ## Features
 Tracking to remember what I've added.

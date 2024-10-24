@@ -11,7 +11,7 @@ local plugs = {
     {'hrsh7th/cmp-vsnip'},                      -- vsnip source
     {'hrsh7th/vim-vsnip'},                      -- snippet engine
 
-    -- cmp sources
+    -- basic cmp sources
     {'hrsh7th/cmp-buffer'},                     -- Buffer completion
     {'hrsh7th/cmp-nvim-lsp'},                   -- LSP completion
 }
@@ -27,9 +27,10 @@ local config = function()
             expand = cmp_expand_fn,
         },
         sources = {
-            {name = 'vsnip'},
-            {name = 'buffer'},
-            {name = 'nvim_lsp'},
+            {name = "cody"},
+            {name = "nvim_lsp"},
+            {name = "vsnip"},
+            {name = "buffer"},
         },
         window = {
             completion = cmp.config.window.bordered(),
@@ -40,7 +41,9 @@ local config = function()
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.abort(),
-            ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            ['<Tab>'] = cmp.mapping.confirm({ select = false}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            ['<C-j>'] = cmp.mapping.select_next_item(),
+            ['<C-k>'] = cmp.mapping.select_prev_item(),
         },
     })
 end

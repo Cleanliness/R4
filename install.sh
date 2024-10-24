@@ -20,5 +20,5 @@ rm -rf ~/.local/share/nvim       # stdpath('data')
 # rm -rf $NV_CONFIG
 # rm -rf $NV_DATA
 
-cp -r ../r4 ~/.config/nvim
+cp -r ../R4 ~/.config/nvim
 echo "Complete."
