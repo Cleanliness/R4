@@ -29,12 +29,11 @@ vim.opt.rtp:prepend(lazypath)              -- this ensures require('lazy') works
 --  as they will be available in your neovim runtime.
 
 require('lazy').setup({
-  'tpope/vim-fugitive',                    -- git commands in nvim
-  'tpope/vim-sleuth',                      -- auto detect indent style 
-  {"nvim-tree/nvim-web-devicons"},
+  "tpope/vim-fugitive",                    -- git commands in nvim
+  "tpope/vim-sleuth",                      -- auto detect indent style 
+  "nvim-tree/nvim-web-devicons",
 
   ---------------- Everything else --------------------
-  -- 
   require('plugins.telescope').plugs,      -- fuzzy finder
   require('plugins.treesitter').plugs,     -- highlighting and more 
   require('plugins.lsp').plugs,            -- all LSP stuff
@@ -47,6 +46,7 @@ require('lazy').setup({
   require('plugins.ui.lualine').plugs,     -- statusline
   require('plugins.ui.filetree').plugs,    -- file explorer
   require('plugins.ui.outline').plugs,     -- code outline
+  require('plugins.ui.smear').plugs,       -- cursor smearing
 
   -- QOL
   require('plugins.swenv').plugs,          -- switch python environments
@@ -65,20 +65,7 @@ require('plugins.cmp').config()
 require('plugins.gpt.sg').config()
 require('plugins.swenv').config()
 require('plugins.telescope').config()
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
-
--- Configure treesitter
-require('plugins.treesitter').TSconfig()
+require('plugins.treesitter').config()
 
 
 ------------------------------------------------------
@@ -89,4 +76,16 @@ require('plugins.treesitter').TSconfig()
 
 require('core.keymaps')
 require('custom.term')
+
+
+-- Highlight on yank
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
 

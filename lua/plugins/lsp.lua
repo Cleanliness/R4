@@ -18,6 +18,34 @@ local plugs = {
 }
 
 ------------------------------------------------------
+--                     Helpers
+------------------------------------------------------
+
+-- Highlight on hover
+-- :h vim.lsp.buf.document_highlight()
+local lsp_highlight_hover = function(args)
+  local bufnr = args.buf
+  vim.api.nvim_create_autocmd('CursorHold', {
+    buffer = bufnr,
+    callback = function()
+      vim.lsp.buf.document_highlight()
+    end
+  })
+  vim.api.nvim_create_autocmd('CursorHoldI', {
+    buffer = bufnr,
+    callback = function()
+      vim.lsp.buf.document_highlight()
+    end
+  })
+  vim.api.nvim_create_autocmd('CursorMoved', {
+    buffer = bufnr,
+    callback = function()
+      vim.lsp.buf.clear_references()
+    end
+  })
+end
+
+------------------------------------------------------
 --                     Mason
 ------------------------------------------------------
 -- Easily install LSP/DAP/Linters
@@ -67,6 +95,10 @@ end
 
 local config = function()
   mason_config()
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = lsp_highlight_hover,
+  })
 end
 
 return {

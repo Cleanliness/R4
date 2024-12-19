@@ -30,7 +30,7 @@ local lang_base = {
   "typescript",
 }
 
-local TSconfig = function()
+local config = function()
   local ts = require('nvim-treesitter.configs')
   ts.setup({
     ensure_installed = lang_base,       -- Install the base languages
@@ -41,5 +41,5 @@ end
 
 return {
   plugs = plugs,
-  TSconfig = TSconfig
+  config = config
 }
