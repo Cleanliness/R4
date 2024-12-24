@@ -20,7 +20,8 @@ if not vim.loop.fs_stat(lazypath) then     -- first time clone
     lazypath,
   }
 end
-vim.opt.rtp:prepend(lazypath)              -- this ensures require('lazy') works 
+vim.opt.rtp:prepend(lazypath)              -- this ensures require('lazy') works
+
 
 ------------------------------------------------------
 --                      Setup
@@ -37,7 +38,7 @@ require('lazy').setup({
   require('plugins.telescope').plugs,      -- fuzzy finder
   require('plugins.treesitter').plugs,     -- highlighting and more 
   require('plugins.lsp').plugs,            -- all LSP stuff
-  require('plugins.cmp').plugs,            -- completion
+  require('plugins.blink_cmp').plugs,      -- completion
 
   -- AI
   require('plugins.gpt.sg').plugs,         -- AI completion
@@ -61,7 +62,6 @@ vim.cmd [[ colorscheme minilight ]]
 
 require('plugins.lsp').config()
 require('plugins.ui.filetree').config()
-require('plugins.cmp').config()
 require('plugins.gpt.sg').config()
 require('plugins.swenv').config()
 require('plugins.telescope').config()
