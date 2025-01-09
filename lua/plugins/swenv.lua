@@ -25,7 +25,7 @@ end
 ------------------------------------------------------
 --                   user commands
 ------------------------------------------------------
--- :venvs - select virtual environment
+-- :Venvs - select virtual environment
 local _set_user_commands = function()
     vim.api.nvim_create_user_command('Venvs', function()
         require('swenv.api').pick_venv()

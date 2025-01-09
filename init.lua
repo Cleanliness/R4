@@ -40,13 +40,13 @@ require('lazy').setup({
   require('plugins.lsp').plugs,            -- all LSP stuff
   require('plugins.blink_cmp').plugs,      -- completion
 
-  -- AI
-  require('plugins.gpt.sg').plugs,         -- AI completion
+  -- LM
+  require('plugins.gpt.sg').plugs,         -- LM completion
 
   -- UI
   require('plugins.ui.lualine').plugs,     -- statusline
   require('plugins.ui.filetree').plugs,    -- file explorer
-  require('plugins.ui.outline').plugs,     -- code outline
+  -- require('plugins.ui.outline').plugs,     -- code outline
   require('plugins.ui.smear').plugs,       -- cursor smearing
 
   -- QOL
@@ -58,7 +58,6 @@ require('lazy').setup({
 ------------------------------------------------------
 -- At this point, all plugins are loaded/built 
 -- and you can now configure them
-vim.cmd [[ colorscheme minilight ]]
 
 require('plugins.lsp').config()
 require('plugins.ui.filetree').config()
@@ -67,6 +66,8 @@ require('plugins.swenv').config()
 require('plugins.telescope').config()
 require('plugins.treesitter').config()
 
+
+vim.cmd [[ colorscheme minilight ]]
 
 ------------------------------------------------------
 --                post-config things

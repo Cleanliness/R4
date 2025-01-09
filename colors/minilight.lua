@@ -105,26 +105,28 @@ c_winterYellow = '#e2dcd4'
 -- stylua: ignore end
 -- }}}
 
+-- NOTE: this messes with some command line tools
+-- commented out for now
 -- Terminal colors {{{
 -- stylua: ignore start
-vim.g.terminal_color_0  = c_macroBg1
-vim.g.terminal_color_1  = c_macroRed
-vim.g.terminal_color_2  = c_macroGreen1
-vim.g.terminal_color_3  = c_autumnYellow
-vim.g.terminal_color_4  = c_macroBlue1
-vim.g.terminal_color_5  = c_springViolet
-vim.g.terminal_color_6  = c_macroAqua
-vim.g.terminal_color_7  = c_macroBg5
-vim.g.terminal_color_8  = c_macroBg3
-vim.g.terminal_color_9  = c_waveRed
-vim.g.terminal_color_10 = c_macroGreen0
-vim.g.terminal_color_11 = c_carpYellow
-vim.g.terminal_color_12 = c_springBlue
-vim.g.terminal_color_13 = c_sumiInk6
-vim.g.terminal_color_14 = c_waveAqua1
-vim.g.terminal_color_15 = c_macroFg0
-vim.g.terminal_color_16 = c_macroOrange0
-vim.g.terminal_color_17 = c_macroOrange1
+-- vim.g.terminal_color_0  = c_macroBg1
+-- vim.g.terminal_color_1  = c_macroRed
+-- vim.g.terminal_color_2  = c_macroGreen1
+-- vim.g.terminal_color_3  = c_autumnYellow
+-- vim.g.terminal_color_4  = c_macroBlue1
+-- vim.g.terminal_color_5  = c_springViolet
+-- vim.g.terminal_color_6  = c_macroAqua
+-- vim.g.terminal_color_7  = c_macroBg5
+-- vim.g.terminal_color_8  = c_macroBg3
+-- vim.g.terminal_color_9  = c_waveRed
+-- vim.g.terminal_color_10 = c_macroGreen0
+-- vim.g.terminal_color_11 = c_carpYellow
+-- vim.g.terminal_color_12 = c_springBlue
+-- vim.g.terminal_color_13 = c_sumiInk6
+-- vim.g.terminal_color_14 = c_waveAqua1
+-- vim.g.terminal_color_15 = c_macroFg0
+-- vim.g.terminal_color_16 = c_macroOrange0
+-- vim.g.terminal_color_17 = c_macroOrange1
 -- stylua: ignore end
 --- }}}
 

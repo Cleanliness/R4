@@ -1,14 +1,13 @@
--- Treesitter is an incremental parser providing a framework
--- for building syntax trees
+-- Treesitter is an incremental parser framework for building syntax trees
 --    With this, we can **SUPPORT** highlighting, etc.
 --    for arbitrary languages (provided it has a parser)
 -- You can check the AST w/ `:InspectTree`
 
--- TLDR: AST-aware features:
+-- In short: ST-aware features:
 --    syntax highlighting, linting
 --    folding, indenting, etc.
 
--- NOTE: Treesitter is already in neovim (try vim.treesitter)
+-- NOTE: Treesitter api is already in neovim (try vim.treesitter)
 -- We are just configuring it here
 
 -- TODO: nvim-treesitter-textobjects?

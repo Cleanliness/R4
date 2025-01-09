@@ -9,6 +9,7 @@ Tiny neovim setup. Tried to make everything as readable/modular as possible, in 
 
 ### Things needed by nvim-treesitter and LSP:
 For AST and LSP related features. Adds a huge amount of dependencies. Until I find a way to cut this down, you'll need to install these.
+- watch for wasm parser integration https://github.com/neovim/neovim/pull/28415
 
 **Building treesitter parsers**:
 - A C compiler and libstdc++
@@ -35,8 +36,8 @@ Things that need to be done after running the install script.
 Tracking to remember what I've added.
 
 ### From Plugins
-- Highlighting, 
-- Autocompletion via nvim-cmp
+- TS parser installation for highlighting
+- Autocompletion from blink nvim
 - File tree via nvim-tree + keybinds
 - LSP via mason/lspconfig
 - Telescope for fuzzy finding + keybinds
