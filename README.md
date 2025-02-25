@@ -5,7 +5,6 @@ Tiny neovim setup. Tried to make everything as readable/modular as possible, in 
 - Neovim >= 0.9
 - git
 - ripgrep (telescope)
-- sshfs (remote editing)
 
 ### Things needed by nvim-treesitter and LSP:
 For AST and LSP related features. Adds a huge amount of dependencies. Until I find a way to cut this down, you'll need to install these.
@@ -29,27 +28,29 @@ sh install.sh
 Things that need to be done after running the install script.
 
 ### LM completions
-
-
+`:SourcegraphLogin`
 
 ## Features
 Tracking to remember what I've added.
 
-### From Plugins
+### With Plugins (12)
 - TS parser installation for highlighting
 - Autocompletion from blink nvim
-- File tree via nvim-tree + keybinds
 - LSP via mason/lspconfig
-- Telescope for fuzzy finding + keybinds
-- Statusline via Lualine
-- text completion
+- Telescope for searching
+- Statusline from Lualine
+- fitm lm completion
 
 ### My stuff
 
+in `lua/custom` and `lua/core`
+**netrw**
+- nvim-tree style config
+
 **Integrated Terminal**
 - QOL improvements (auto enter insert mode in term)
-- User commands for opening in a split
+- Removes line number tray
+- User commands for opening in a split (`Verm`, `Herm`)
 
 # TODO
-- [ ] resource monitor
 - [ ] remote

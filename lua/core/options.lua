@@ -31,7 +31,7 @@ opt.autowriteall   = true
 opt.virtualedit    = 'block'
 opt.completeopt    = 'menuone'
 
-wo.number = true                    -- Make line numbers default
+wo.number = true                        -- Make line numbers default
 opt.hlsearch = false                    -- Set highlight on search
 opt.mouse = 'a'                         -- Enable mouse mode
 opt.clipboard = 'unnamedplus'           -- Sync clipboard between OS and Neovim.

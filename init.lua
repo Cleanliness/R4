@@ -1,6 +1,4 @@
 -- Entry point on nvim startup if you forgor
--- Pre setup things
-require('plugins.ui.filetree').pre()
 
 -- Basic settings that don't require plugins
 require('core.options')
@@ -30,12 +28,8 @@ vim.opt.rtp:prepend(lazypath)              -- this ensures require('lazy') works
 --  as they will be available in your neovim runtime.
 
 require('lazy').setup({
-  "tpope/vim-fugitive",                    -- git commands in nvim
-  "tpope/vim-sleuth",                      -- auto detect indent style 
-  "nvim-tree/nvim-web-devicons",
-
   ---------------- Everything else --------------------
-  require('plugins.telescope').plugs,      -- fuzzy finder
+  require('plugins.telescope').plugs,      -- search
   require('plugins.treesitter').plugs,     -- highlighting and more 
   require('plugins.lsp').plugs,            -- all LSP stuff
   require('plugins.blink_cmp').plugs,      -- completion
@@ -45,9 +39,6 @@ require('lazy').setup({
 
   -- UI
   require('plugins.ui.lualine').plugs,     -- statusline
-  require('plugins.ui.filetree').plugs,    -- file explorer
-  -- require('plugins.ui.outline').plugs,     -- code outline
-  require('plugins.ui.smear').plugs,       -- cursor smearing
 
   -- QOL
   require('plugins.swenv').plugs,          -- switch python environments
@@ -60,7 +51,6 @@ require('lazy').setup({
 -- and you can now configure them
 
 require('plugins.lsp').config()
-require('plugins.ui.filetree').config()
 require('plugins.gpt.sg').config()
 require('plugins.swenv').config()
 require('plugins.telescope').config()
@@ -76,6 +66,7 @@ vim.cmd [[ colorscheme minilight ]]
 -- loaded and configured
 
 require('core.keymaps')
+require('custom.netrw')
 require('custom.term')
 
 

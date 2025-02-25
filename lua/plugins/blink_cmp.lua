@@ -14,6 +14,7 @@ local plugs = {
             {"sourcegraph/sg.nvim"},
         },
         version = '*',
+		signature = {enabled = true},
         opts = {
             keymap = { preset = 'super-tab' },
             appearance = {
