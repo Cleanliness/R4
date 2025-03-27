@@ -41,7 +41,6 @@ opt.undofile = true                     -- Save undo history
 -- Case-insensitive searching UNLESS \C or capital in search
 opt.ignorecase = true
 opt.smartcase = true
-
 opt.signcolumn = 'yes'                  -- Keep signcolumn on by default
 
 -- Decrease update time
@@ -54,13 +53,15 @@ opt.termguicolors = true                -- NOTE: You should make sure your termi
 -- tab and space
 opt.tabstop = 4
 opt.shiftwidth = 4
+opt.list = true
+opt.listchars = 'tab:▸ ,trail:·,nbsp:·,precedes:←,extends:→'
 
 -- Leader to space
 g.mapleader = " "
 
 ---------------------- Neovide ----------------------
 -- https://neovide.dev/configuration.html
-vim.g.neovide_scale_factor = 0.70
+vim.g.neovide_scale_factor = 0.6
 vim.g.neovide_scroll_animation_length = 0.15
 vim.g.neovide_cursor_animation_length = 0.05
 
@@ -68,6 +69,7 @@ vim.g.neovide_cursor_animation_length = 0.05
 
 -- WSL case
 if vim.fn.has('wsl') == 1 then
+    vim.g.neovide_scale_factor = 0.5
     vim.g.clipboard = {
         name = 'WslClipboard',
         copy = {

@@ -18,11 +18,15 @@ local search_wdir = function()
 end
 
 -- search current buffer
-local search_buffer = function()
+local search_buf = function()
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
     previewer = true,
   })
+end
+
+-- search files in cwd
+local search_files = function()
+	require('telescope.builtin').find_files()
 end
 
 ------------------------------------------------------
@@ -32,8 +36,6 @@ end
 local config = function()
   local tele = require('telescope')
 
-  -- Enable telescope fzf native, if installed
-  pcall(tele.load_extension, 'fzf')
   tele.setup {
     defaults = {
       mappings = {
@@ -45,7 +47,8 @@ local config = function()
     },
   }
   vim.keymap.set('n', '<leader><space>', search_wdir, {desc = 'Live grep in working directory'})
-  vim.keymap.set('n', '<leader>/', search_buffer, {desc = '[/] Fuzzily search in current buffer'})
+  vim.keymap.set('n', '<leader>f', search_files, {desc = 'Search files in working dir'})
+  vim.keymap.set('n', '<leader>/', search_buf, {desc = '[/] Fuzzily search in current buffer'})
 end
 
 return {

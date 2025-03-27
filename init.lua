@@ -2,6 +2,7 @@
 
 -- Basic settings that don't require plugins
 require('core.options')
+require('custom.diagnostic')
 
 ------------------------------------------------------
 --                  init Lazy.nvim 
@@ -28,6 +29,8 @@ vim.opt.rtp:prepend(lazypath)              -- this ensures require('lazy') works
 --  as they will be available in your neovim runtime.
 
 require('lazy').setup({
+  'navarasu/onedark.nvim',
+
   ---------------- Everything else --------------------
   require('plugins.telescope').plugs,      -- search
   require('plugins.treesitter').plugs,     -- highlighting and more 
@@ -38,8 +41,7 @@ require('lazy').setup({
   require('plugins.gpt.sg').plugs,         -- LM completion
 
   -- UI
-  require('plugins.ui.lualine').plugs,     -- statusline
-
+  require('plugins.ui.files').plugs,       -- file explorer
   -- QOL
   require('plugins.swenv').plugs,          -- switch python environments
 }, {})
@@ -55,9 +57,16 @@ require('plugins.gpt.sg').config()
 require('plugins.swenv').config()
 require('plugins.telescope').config()
 require('plugins.treesitter').config()
+require('plugins.ui.files').config()
 
+-----------------------------------------------------
 
-vim.cmd [[ colorscheme minilight ]]
+require('onedark').setup({
+    style = 'light',
+    toggle_style_key = "<leader>ts",
+    toggle_style_list = {'cool', 'light'},
+})
+require('onedark').load()
 
 ------------------------------------------------------
 --                post-config things
@@ -68,7 +77,7 @@ vim.cmd [[ colorscheme minilight ]]
 require('core.keymaps')
 require('custom.netrw')
 require('custom.term')
-
+require('custom.doc')
 
 -- Highlight on yank
 -- See `:help vim.highlight.on_yank()`

@@ -10,11 +10,9 @@ local plugs = {
         'saghen/blink.cmp',
         -- optional: provides snippets for the snippet source
         -- dependencies = 'rafamadriz/friendly-snippets',
-        dependencies = {
-            {"sourcegraph/sg.nvim"},
-        },
+        dependencies = "sourcegraph/sg.nvim",
         version = '*',
-		signature = {enabled = true},
+        signature = {enabled = true},
         opts = {
             keymap = { preset = 'super-tab' },
             appearance = {
@@ -35,8 +33,16 @@ local plugs = {
                     }
                 }
             },
+            cmdline = {
+                enabled = true,
+                completion = {
+                    menu = {auto_show = true}
+                }
+            },
+            completion = {
+                menu = {auto_show = true}
+            }
         },
-        -- opts_extend = { "sources.default" }
     }
 }
 

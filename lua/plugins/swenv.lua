@@ -2,7 +2,7 @@
 
 local plugs = {
     {
-        "AckslD/swenv.nvim",
+        "Cleanliness/swenv.nvim",
         dependencies = {
             'nvim-lua/plenary.nvim',
       }
@@ -11,10 +11,14 @@ local plugs = {
 
 -- Called after setting a virtual environment
 local _post_set_venv = function()
-    vim.cmd('LspRestart')
-
-    -- make terminal use the new virtual environment
-
+    vim.lsp.stop_client(vim.lsp.get_clients())
+    if vim.wait(5000, function() return next(vim.lsp.get_clients()) == nil end) then
+        if vim.fn.bufname("%") ~= '' then
+            vim.cmd("edit")
+        end
+        else
+            print("couldn't stop lsp")
+    end
 end
 
 -- Populate list of virtual environments

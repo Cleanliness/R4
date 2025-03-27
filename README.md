@@ -2,12 +2,12 @@
 Tiny neovim setup. Tried to make everything as readable/modular as possible, in case I come back to this in the future. Runs smoothly on my potato i5 laptop, so it should be fine for most people.
 
 ## Dependencies
-- Neovim >= 0.9
+- Neovim >= 0.11
 - git
 - ripgrep (telescope)
 
 ### Things needed by nvim-treesitter and LSP:
-For AST and LSP related features. Adds a huge amount of dependencies. Until I find a way to cut this down, you'll need to install these.
+Adds a huge amount of dependencies. Until I find a way to cut this down, you'll need to install these.
 - watch for wasm parser integration https://github.com/neovim/neovim/pull/28415
 
 **Building treesitter parsers**:
