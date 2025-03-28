@@ -30,9 +30,10 @@ vim.opt.rtp:prepend(lazypath)              -- this ensures require('lazy') works
 
 require('lazy').setup({
   'navarasu/onedark.nvim',
+  'tpope/vim-sleuth',
 
   ---------------- Everything else --------------------
-  require('plugins.telescope').plugs,      -- search
+  require('plugins.ui.telescope').plugs,      -- search
   require('plugins.treesitter').plugs,     -- highlighting and more 
   require('plugins.lsp').plugs,            -- all LSP stuff
   require('plugins.blink_cmp').plugs,      -- completion
@@ -55,7 +56,7 @@ require('lazy').setup({
 require('plugins.lsp').config()
 require('plugins.gpt.sg').config()
 require('plugins.swenv').config()
-require('plugins.telescope').config()
+require('plugins.ui.telescope').config()
 require('plugins.treesitter').config()
 require('plugins.ui.files').config()
 
