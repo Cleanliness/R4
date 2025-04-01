@@ -26,31 +26,25 @@ sh install.sh
 
 ## Post-install setup
 Things that need to be done after running the install script.
-
-### LM completions
-`:SourcegraphLogin`
+- None for now
 
 ## Features
 Tracking to remember what I've added.
 
-### With Plugins (12)
+### With Plugins (10)
 - TS parser installation for highlighting
 - Autocompletion from blink nvim
 - LSP via mason/lspconfig
 - Telescope for searching
-- Statusline from Lualine
-- fitm lm completion
 
 ### My stuff
 
 in `lua/custom` and `lua/core`
 **netrw**
-- nvim-tree style config
+- tree style config
 
 **Integrated Terminal**
 - QOL improvements (auto enter insert mode in term)
 - Removes line number tray
 - User commands for opening in a split (`Verm`, `Herm`)
 
-# TODO
-- [ ] remote

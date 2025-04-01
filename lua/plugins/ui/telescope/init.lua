@@ -63,8 +63,8 @@ local config = function()
     }
   }
   vim.keymap.set('n', '<leader><space>', search_wdir, {desc = 'Live grep in working directory'})
-  vim.keymap.set('n', '<leader>f', builtin.git_files, {desc = 'Search git tracked files in working dir'})
-  vim.keymap.set('n', '<leader>F', search_files, {desc = 'Search all files in working dir'})
+  vim.keymap.set('n', '<leader>f', search_files, {desc = 'Search all files in working dir'})
+  vim.keymap.set('n', '<leader>F', builtin.git_files, {desc = 'Search git tracked files in working dir'})
   vim.keymap.set('n', '<leader>/', search_buf, {desc = '[/] Fuzzily search in current buffer'})
   vim.api.nvim_create_user_command("Git", builtin.git_status, {})
 end

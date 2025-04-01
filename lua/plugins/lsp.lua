@@ -1,9 +1,8 @@
 -- Use language server features in Neovim
 --   i.e. Code completion, go to def, find references, etc.
 --   https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#languageServerProtocol
---   youtube.com/watch?v=HL7b63Hrc8U
 -- Debugging:
---    `:checkhealth vim.lsp`
+--   `:checkhealth vim.lsp`
 
 
 -- Note: requires git, curl/wget, unzip, tar, gzip
@@ -17,6 +16,17 @@ local plugs = {
 ------------------------------------------------------
 local map = function(type, key, value)
   vim.api.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
+end
+
+local ensure_install = function(servers)
+  local mason_registry = require("mason-registry")
+
+  for _, server in ipairs(servers) do
+    if not mason_registry.is_installed(server) then
+      print("[lsp.lua] installing " .. server)
+      mason_registry.get_package(server):install()
+    end
+  end
 end
 
 ------------------------------------------------------
@@ -61,9 +71,12 @@ local mason_config = function()
   mason.setup({
     install_root_dir = config.lsp_path
   })
+  local success, res = pcall(ensure_install, config.mason_lsp)
+  if not success then
+    print("[lsp.lua] could not ensure lsps are installed", res)
+  end
 
   config.apply_config()
-  print("lsp path:" .. config.lsp_path)
 end
 
 ------------------------------------------------------

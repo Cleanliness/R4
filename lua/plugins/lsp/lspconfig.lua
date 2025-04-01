@@ -1,8 +1,8 @@
 local function join_paths(...)
-	-- directory separator
-	-- https://www.lua.org/manual/5.2/manual.html#pdf-package.config
-    local separator = package.config:sub(1, 1)
-    return table.concat({...}, separator)
+  -- directory separator
+  -- https://www.lua.org/manual/5.2/manual.html#pdf-package.config
+  local separator = package.config:sub(1, 1)
+  return table.concat({...}, separator)
 end
 
 --------------------------------------------------
@@ -10,6 +10,14 @@ end
 -- ~/.local/share/nvim/mason/bin
 local LSP_PATH = join_paths(vim.fn.stdpath "data", "mason")
 local BIN_PATH = join_paths(LSP_PATH, "bin")
+
+-- servers to ensure are installed
+local MASON_LSP = {
+  "basedpyright",
+  "lua-language-server",
+  "clangd",
+  "typescript-language-server"
+}
 
 --------------------------------------------------
 
@@ -62,6 +70,7 @@ local apply_config = function()
 end
 
 return {
-	lsp_path = LSP_PATH,
-	apply_config = apply_config
+  lsp_path = LSP_PATH,
+  apply_config = apply_config,
+  mason_lsp = MASON_LSP
 }

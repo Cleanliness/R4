@@ -38,9 +38,6 @@ require('lazy').setup({
   require('plugins.lsp').plugs,            -- all LSP stuff
   require('plugins.blink_cmp').plugs,      -- completion
 
-  -- LM
-  require('plugins.gpt.sg').plugs,         -- LM completion
-
   -- UI
   require('plugins.ui.files').plugs,       -- file explorer
   -- QOL
@@ -54,7 +51,6 @@ require('lazy').setup({
 -- and you can now configure them
 
 require('plugins.lsp').config()
-require('plugins.gpt.sg').config()
 require('plugins.swenv').config()
 require('plugins.ui.telescope').config()
 require('plugins.treesitter').config()
