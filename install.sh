@@ -1,24 +1,28 @@
 #!/bin/sh
 
-# fresh install
-echo "Installing new neovim config"
+echo "Installing fresh config to:"
 
-# Get rid of old nvim config
-rm -rf ~/.local/state/nvim       # stdpath('state')
-rm -rf ~/.cache/nvim             # stdpath('cache')
-rm -rf ~/.config/nvim            # stdpath('config')
-rm -rf ~/.local/share/nvim       # stdpath('data')
+NVIM_CONF=$(nvim --headless -c 'lua io.write(vim.fn.stdpath("config"))' -c 'quit')
+NVIM_STATE=$(nvim --headless -c 'lua io.write(vim.fn.stdpath("state"))' -c 'quit')
+NVIM_CACHE=$(nvim --headless -c 'lua io.write(vim.fn.stdpath("cache"))' -c 'quit')
+NVIM_DATA=$(nvim --headless -c 'lua io.write(vim.fn.stdpath("data"))' -c 'quit')
 
-# This doesn't work, not stdout (?)
-# NV_STATE=$(nvim --headless -c 'echo stdpath("state")' -c 'quit')
-# NV_CACHE=$(nvim --headless -c 'echo stdpath("cache")' -c 'quit')
-# NV_CONFIG=$(nvim --headless -c 'echo stdpath("config")' -c 'quit')
-# NV_DATA=$(nvim --headless -c 'echo stdpath("data")' -c 'quit')
-# echo "Removing existing neovim config"
-# rm -rf $NV_STATE
-# rm -rf $NV_CACHE
-# rm -rf $NV_CONFIG
-# rm -rf $NV_DATA
+echo "nvim conf:" $NVIM_CONF
+echo "nvim state:" $NVIM_STATE
+echo "nvim cache:" $NVIM_CACHE
+echo "nvim data:" $NVIM_DATA
 
-cp -r ../R4 ~/.config/nvim
-echo "Complete."
+read -p "Continue (y/n)?" CONT
+if [ "$CONT" = "y" ]; then
+    echo "Removing existing neovim config"
+    # rm -rf $NV_STATE
+    # rm -rf $NV_CACHE
+    # rm -rf $NV_CONFIG
+    # rm -rf $NV_DATA
+    echo "Copying."
+    # cp -r . ~/.config/nvim
+    echo "Complete."
+else
+  echo "Cancelled";
+fi
+

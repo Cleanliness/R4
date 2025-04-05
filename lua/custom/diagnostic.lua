@@ -1,9 +1,6 @@
 -- displaying errors or warnings from external
--- tools, otherwise known as "diagnostics". These diagnostics can
--- come from avariety of sources, such as linters or LSP servers.
--- The diagnostic framework is an extension to existing error
--- handling functionality such as the quickfix list
-
+-- tools, otherwise known as "diagnostics".
+-- variety of sources: linters, LSP servers, etc.
 
 vim.diagnostic.config({
   severity_sort = true,
@@ -11,3 +8,18 @@ vim.diagnostic.config({
   -- hl_mode = 'combine'
 })
 
+-- show diagnostics
+vim.api.nvim_create_user_command(
+  'Diagnose',
+  function(opts)
+    vim.print(opts.args)
+    local bufn = (opts.args and tonumber(opts.args)) or nil
+    local tele = require('telescope.builtin')
+    if tele then
+      tele.diagnostics({bufnr = bufn})
+    else
+      vim.diagnostics.send_to_qflist()
+    end
+  end,
+  { nargs = "?" }
+)

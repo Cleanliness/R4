@@ -71,7 +71,7 @@ local mason_config = function()
   mason.setup({
     install_root_dir = config.lsp_path
   })
-  local success, res = pcall(ensure_install, config.mason_lsp)
+  local success, res = pcall(ensure_install, config.mason_ensure_installed)
   if not success then
     print("[lsp.lua] could not ensure lsps are installed", res)
   end

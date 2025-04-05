@@ -1,3 +1,10 @@
+local providers = {
+  fitm = {
+      module = "custom.gpt.blink_fitm_source",
+      async = true,
+  }
+}
+
 local plugs = {
     {
         'saghen/blink.cmp',
@@ -7,7 +14,7 @@ local plugs = {
         signature = {enabled = true},
         opts = {
             keymap = {
-                preset = 'default',
+                preset = 'super-tab',
                 ['<C-y>'] = { 'accept' }
             },
             appearance = {
@@ -18,7 +25,14 @@ local plugs = {
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer' },
+                default = {
+                    -- broken: 'fitm',
+                    'lsp',
+                    'path',
+                    'snippets',
+                    'buffer'
+                },
+                providers = providers,
             },
             cmdline = {
                 enabled = true,
@@ -36,5 +50,5 @@ local plugs = {
 --------------------------------------------------
 
 return {
-    plugs = plugs
+  plugs = plugs
 }

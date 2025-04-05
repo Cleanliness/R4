@@ -1,5 +1,5 @@
 -- See `:help vim.o`
-local opt = vim.opt
+local opt = vim.o
 local wo = vim.wo
 local g = vim.g
 
@@ -61,9 +61,9 @@ g.mapleader = " "
 
 ---------------------- Neovide ----------------------
 -- https://neovide.dev/configuration.html
-vim.g.neovide_scale_factor = 0.6
+vim.g.neovide_scale_factor = 0.7
 vim.g.neovide_scroll_animation_length = 0.15
-vim.g.neovide_cursor_animation_length = 0.05
+vim.g.neovide_cursor_animation_length = 0.10
 
 --------------------- clipboard ---------------------
 

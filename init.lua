@@ -1,9 +1,8 @@
 -- Entry point on nvim startup if you forgor
-
 -- Basic settings that don't require plugins
 require('core.options')
 require('custom.diagnostic')
-
+-- 
 ------------------------------------------------------
 --                  init Lazy.nvim 
 ------------------------------------------------------
@@ -32,14 +31,12 @@ require('lazy').setup({
   'navarasu/onedark.nvim',
   'tpope/vim-sleuth',
 
-  ---------------- Everything else --------------------
   require('plugins.ui.telescope').plugs,      -- search
   require('plugins.treesitter').plugs,     -- highlighting and more 
   require('plugins.lsp').plugs,            -- all LSP stuff
   require('plugins.blink_cmp').plugs,      -- completion
-
-  -- UI
   require('plugins.ui.files').plugs,       -- file explorer
+
   -- QOL
   require('plugins.swenv').plugs,          -- switch python environments
 }, {})
@@ -75,6 +72,9 @@ require('core.keymaps')
 require('custom.netrw')
 require('custom.term')
 require('custom.doc')
+require('custom.quickfix')
+require('custom.gpt')
+
 
 -- Highlight on yank
 -- See `:help vim.highlight.on_yank()`
