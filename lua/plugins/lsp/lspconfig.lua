@@ -37,10 +37,15 @@ luals = {
 pylsp = {
   cmd = {
     join_paths(BIN_PATH, "basedpyright-langserver"),
-    "--stdio"
+    "--stdio",
   },
   filetypes = {'python'},
   root_markers = { ".pyproject.toml", "setup.py", "requirements.txt" },
+  settings = {
+    basedpyright = {
+      typeCheckingMode = "basic"
+    }
+  }
 },
 
 tsls = {

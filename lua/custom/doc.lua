@@ -19,6 +19,10 @@ end
 
 -- define preview window
 local function preview_def(self, entry, status)
+  if not vim.fn.has("pydoc") then
+    print("pydoc not available")
+    return
+  end
   local cmd = {"pydoc", entry.value}
   vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, {"Loading..."})
   vim.api.nvim_buf_set_option(self.state.bufnr, "filetype", "man")
@@ -53,10 +57,8 @@ local function doc_search()
 end
 
 
+
 vim.keymap.set("n", "<leader>d", function()
-	require("custom.doc").doc_search()
+  doc_search()
 end, { noremap = true, silent = true })
 
-return {
-	doc_search = doc_search,
-}

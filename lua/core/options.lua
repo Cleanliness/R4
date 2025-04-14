@@ -29,7 +29,6 @@ opt.breakindent    = true
 opt.conceallevel   = 2
 opt.autowriteall   = true
 opt.virtualedit    = 'block'
-opt.completeopt    = 'menuone'
 
 wo.number = true                        -- Make line numbers default
 opt.hlsearch = false                    -- Set highlight on search
@@ -47,7 +46,6 @@ opt.signcolumn = 'yes'                  -- Keep signcolumn on by default
 opt.updatetime = 350
 opt.timeoutlen = 400
 
-opt.completeopt = 'menuone,noselect'    -- Set completeopt to have a better completion experience
 opt.termguicolors = true                -- NOTE: You should make sure your terminal supports this
 
 -- tab and space
@@ -58,6 +56,10 @@ opt.listchars = 'tab:▸ ,trail:·,nbsp:·,precedes:←,extends:→'
 
 -- Leader to space
 g.mapleader = " "
+
+-- completion
+opt.completeopt = "menuone,noinsert,noselect,preview"
+opt.complete = ".,w,b,u,t,i"
 
 ---------------------- Neovide ----------------------
 -- https://neovide.dev/configuration.html

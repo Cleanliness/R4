@@ -51,8 +51,27 @@ local init_lsp_highlight_hover = function(args)
 end
 
 
-local lsp_attach = function(args)
+local function init_lsp_completion(args)
+  local client = vim.lsp.get_client_by_id(args.data.client_id)
+  if not client:supports_method('textDocument/completion') then
+    return
+  end
+
+  vim.lsp.completion.enable(
+    true, client.id, args.buf, {
+      autotrigger = true,
+      convert = function(item)
+        return { abbr = item.label:gsub('%b()', '') }
+      end,
+    }
+  )
+end
+
+------------------------------------------------------
+
+local function lsp_attach(args)
   init_lsp_highlight_hover(args)
+  init_lsp_completion(args)
 
   -- ctrl+O to jump back
   map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')

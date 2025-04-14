@@ -2,7 +2,7 @@
 -- Basic settings that don't require plugins
 require('core.options')
 require('custom.diagnostic')
--- 
+
 ------------------------------------------------------
 --                  init Lazy.nvim 
 ------------------------------------------------------
@@ -34,7 +34,7 @@ require('lazy').setup({
   require('plugins.ui.telescope').plugs,      -- search
   require('plugins.treesitter').plugs,     -- highlighting and more 
   require('plugins.lsp').plugs,            -- all LSP stuff
-  require('plugins.blink_cmp').plugs,      -- completion
+  -- require('plugins.blink_cmp').plugs,      -- completion
   require('plugins.ui.files').plugs,       -- file explorer
 
   -- QOL
@@ -74,6 +74,7 @@ require('custom.term')
 require('custom.doc')
 require('custom.quickfix')
 require('custom.gpt')
+require('custom.cmp')
 
 
 -- Highlight on yank

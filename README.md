@@ -14,12 +14,13 @@ Adds a huge amount of dependencies. Until I find a way to cut this down, you'll 
 - A C compiler and libstdc++
 - unzip
 
-**Running LSP**:
-- nodejs
-- npm
+**Running LSPs**:
+- node+npm
 - python3
 
 ## Installation
+Note: this is destructive
+
 ```
 sh install.sh
 ```
@@ -31,17 +32,21 @@ Things that need to be done after running the install script.
 ## Features
 Tracking to remember what I've added.
 
-### With Plugins (10)
+### With Plugins (9)
 - TS parser installation for highlighting
-- Autocompletion from blink nvim
-- LSP via mason/lspconfig
-- Telescope for searching
+- LSP via mason
+- LSP-based autocompletion
+- Telescope picker for pydoc/man
 
 ### My stuff
 
 in `lua/custom` and `lua/core`
 **netrw**
-- tree style config
+- tree style display
+
+**LM completions**
+- basic endpoint manager for prefix-suffix completions
+- fitm-style completion via `vim.fn.complete`
 
 **Integrated Terminal**
 - QOL improvements (auto enter insert mode in term)

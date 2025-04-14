@@ -73,7 +73,7 @@ local function codestral_call(pre, suf)
     model = "codestral-latest",
     prompt = pre,
     suffix = suf,
-    max_tokens = 64,
+    max_tokens = 128,
     temperature = 0
   })
 
@@ -98,8 +98,6 @@ end
 local function request_completion()
   local pre, suf, lb, la = get_text_around_cursor()
   local res = codestral_call(pre, suf)
-
-  -- vim.print(res)
 
   return res
 end
