@@ -6,11 +6,13 @@ local fitm = require('custom.gpt.fitm')
 local function fitm_comp()
   local col = vim.fn.col('.')
   local comps = {
-    {word = fitm.request_completion(), menu="[codestral]"}
+    { word = fitm.request_completion(), menu="[codestral]" }
   }
+
+  -- display in window
   vim.fn.complete(col, comps)
 end
 
 -- trigger completion
-vim.keymap.set('i', '<C-x><C-a>', fitm_comp, {desc = "lm completion"})
+vim.keymap.set('i', '<C-x><C-a>', fitm_comp, {desc = "language model completion"})
 

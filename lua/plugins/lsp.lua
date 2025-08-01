@@ -71,7 +71,7 @@ end
 
 local function lsp_attach(args)
   init_lsp_highlight_hover(args)
-  init_lsp_completion(args)
+  -- init_lsp_completion(args)
 
   -- ctrl+O to jump back
   map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')

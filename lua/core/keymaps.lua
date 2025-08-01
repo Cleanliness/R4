@@ -14,9 +14,18 @@ vim.keymap.set('n', '<C-a>', vim.diagnostic.open_float, { desc = 'Open floating 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 
--- Use system clipboard
-vim.keymap.set('n','y','"+y')
-vim.keymap.set('n','yy','"+yy')
-vim.keymap.set('n','Y','"+Y')
+------------------------------------------------------
+--                    Scrollwhell
+------------------------------------------------------
 
+-- Make the wheel scroll the viewport, not the cursor
+vim.keymap.set('n', '<ScrollWheelUp>', '<C-Y>', { noremap = true })
+vim.keymap.set('n', '<ScrollWheelDown>', '<C-E>', { noremap = true })
 
+-- same thing in visual/insert/select mode
+vim.keymap.set('i', '<ScrollWheelUp>', '<C-O><C-Y>', { noremap = true })
+vim.keymap.set('i', '<ScrollWheelDown>', '<C-O><C-E>', { noremap = true })
+vim.keymap.set('v', '<ScrollWheelUp>', '<C-Y>', { noremap = true })
+vim.keymap.set('v', '<ScrollWheelDown>', '<C-E>', { noremap = true })
+vim.keymap.set('s', '<ScrollWheelUp>', '<C-Y>', { noremap = true })
+vim.keymap.set('s', '<ScrollWheelDown>', '<C-E>', { noremap = true })

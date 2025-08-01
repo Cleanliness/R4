@@ -1,531 +1,104 @@
--- adapted from https://github.com/Bekaboo/nvim
-
--- Clear hlgroups and set colors_name {{{
-vim.cmd.hi('clear')
-vim.g.colors_name = 'minilight'
--- }}}
-
--- Palette {{{
--- stylua: ignore start
-local c_autumnGreen
-local c_autumnRed
-local c_autumnYellow
-local c_carpYellow
-local c_lotusBlue
-local c_lotusGray
-local c_lotusRed0
-local c_lotusRed1
-local c_lotusRed2
-local c_macroAqua
-local c_macroAsh
-local c_macroBg0
-local c_macroBg1
-local c_macroBg2
-local c_macroBg3
-local c_macroBg4
-local c_macroBg5
-local c_macroBlue0
-local c_macroBlue1
-local c_macroFg0
-local c_macroFg1
-local c_macroFg2
-local c_macroGray0
-local c_macroGray1
-local c_macroGray2
-local c_macroGreen0
-local c_macroGreen1
-local c_macroOrange0
-local c_macroOrange1
-local c_macroPink
-local c_macroRed
-local c_macroTeal
-local c_macroViolet
-local c_roninYellow
-local c_springBlue
-local c_springGreen
-local c_springViolet
-local c_sumiInk6
-local c_waveAqua0
-local c_waveAqua1
-local c_waveBlue0
-local c_waveBlue1
-local c_waveRed
-local c_winterBlue
-local c_winterGreen
-local c_winterRed
-local c_winterYellow
-
-c_autumnGreen  = '#969438'
-c_autumnRed    = '#b73242'
-c_autumnYellow = '#a0713c'
-c_carpYellow   = '#debe97'
-c_lotusBlue    = '#9fb5c9'
-c_lotusGray    = '#716e61'
-c_lotusRed0    = '#d7474b'
-c_lotusRed1    = '#e84444'
-c_lotusRed2    = '#d9a594'
-c_macroAqua    = '#586e62'
-c_macroAsh     = '#a0a0a0'
-c_macroBg0     = '#f6f6f6'
-c_macroBg1     = '#e7e7e7'
-c_macroBg2     = '#eeeeee'
-c_macroBg3     = '#d8d8d8'
-c_macroBg4     = '#c8c8c8'
-c_macroBg5     = '#a0a0a0'
-c_macroBlue0   = '#658594'
-c_macroBlue1   = '#537788'
-c_macroFg0     = '#1b1b1b'
-c_macroFg1     = '#303030'
-c_macroFg2     = '#787878'
-c_macroGray0   = '#827f79'
-c_macroGray1   = '#6e6b66'
-c_macroGray2   = '#7a8382'
-c_macroGreen0  = '#87a987'
-c_macroGreen1  = '#6a824f'
-c_macroOrange0 = '#a06c4e'
-c_macroOrange1 = '#825c45'
-c_macroPink    = '#a292a3'
-c_macroRed     = '#b23b34'
-c_macroTeal    = '#445f96'
-c_macroViolet  = '#373e50'
-c_roninYellow  = '#c87b2e'
-c_springBlue   = '#7fb4ca'
-c_springGreen  = '#98bb6c'
-c_springViolet = '#938aa9'
-c_sumiInk6     = '#b1b1d2'
-c_waveAqua0    = '#69827b'
-c_waveAqua1    = '#7aa89f'
-c_waveBlue0    = '#223249'
-c_waveBlue1    = '#2d4f67'
-c_waveRed      = '#e46876'
-c_winterBlue   = '#d4d4f0'
-c_winterGreen  = '#d5dcd2'
-c_winterRed    = '#e6c2c7'
-c_winterYellow = '#e2dcd4'
--- stylua: ignore end
--- }}}
-
--- NOTE: this messes with some command line tools
--- commented out for now
--- Terminal colors {{{
--- stylua: ignore start
--- vim.g.terminal_color_0  = c_macroBg1
--- vim.g.terminal_color_1  = c_macroRed
--- vim.g.terminal_color_2  = c_macroGreen1
--- vim.g.terminal_color_3  = c_autumnYellow
--- vim.g.terminal_color_4  = c_macroBlue1
--- vim.g.terminal_color_5  = c_springViolet
--- vim.g.terminal_color_6  = c_macroAqua
--- vim.g.terminal_color_7  = c_macroBg5
--- vim.g.terminal_color_8  = c_macroBg3
--- vim.g.terminal_color_9  = c_waveRed
--- vim.g.terminal_color_10 = c_macroGreen0
--- vim.g.terminal_color_11 = c_carpYellow
--- vim.g.terminal_color_12 = c_springBlue
--- vim.g.terminal_color_13 = c_sumiInk6
--- vim.g.terminal_color_14 = c_waveAqua1
--- vim.g.terminal_color_15 = c_macroFg0
--- vim.g.terminal_color_16 = c_macroOrange0
--- vim.g.terminal_color_17 = c_macroOrange1
--- stylua: ignore end
---- }}}
-
--- Highlight groups {{{1
-local hlgroups = {
-  -- UI {{{2
-  ColorColumn = { bg = c_macroBg2 },
-  Conceal = { bold = true, fg = c_macroGray2 },
-  CurSearch = { link = 'IncSearch' },
-  Cursor = { bg = c_macroFg0, fg = c_macroBg1 },
-  CursorColumn = { link = 'CursorLine' },
-  CursorIM = { link = 'Cursor' },
-  CursorLine = { bg = c_macroBg0 },
-  CursorLineNr = { fg = c_macroGray0, bold = true },
-  DebugPC = { bg = c_winterRed },
-  DiffAdd = { bg = c_winterGreen },
-  DiffChange = { bg = c_winterBlue },
-  DiffDelete = { fg = c_macroBg4 },
-  DiffText = { bg = c_sumiInk6 },
-  Directory = { fg = c_macroBlue1 },
-  EndOfBuffer = { fg = c_macroBg1 },
-  ErrorMsg = { fg = c_lotusRed1 },
-  FloatBorder = { bg = c_macroBg0, fg = c_sumiInk6 },
-  FloatFooter = { bg = c_macroBg0, fg = c_macroBg5 },
-  FloatTitle = { bg = c_macroBg0, fg = c_macroGray2, bold = true },
-  FoldColumn = { fg = c_macroBg5 },
-  Folded = { bg = c_macroBg2, fg = c_lotusGray },
-  Ignore = { link = 'NonText' },
-  IncSearch = { bg = c_carpYellow, fg = c_waveBlue0 },
-  LineNr = { fg = c_macroBg5 },
-  MatchParen = { bg = c_macroBg4 },
-  ModeMsg = { fg = c_macroRed, bold = true },
-  MoreMsg = { fg = c_macroBlue0 },
-  MsgArea = { fg = c_macroFg1 },
-  MsgSeparator = { bg = c_macroBg0 },
-  NonText = { fg = c_macroBg5 },
-  Normal = { bg = c_macroBg1, fg = c_macroFg0 },
-  NormalFloat = { bg = c_macroBg0, fg = c_macroFg1 },
-  NormalNC = { link = 'Normal' },
-  Pmenu = { bg = c_macroBg3, fg = c_macroFg1 },
-  PmenuSbar = { bg = c_macroBg4 },
-  PmenuSel = { bg = c_macroBg4, fg = 'NONE' },
-  PmenuThumb = { bg = c_macroBg5 },
-  Question = { link = 'MoreMsg' },
-  QuickFixLine = { bg = c_macroBg3 },
-  Search = { bg = c_macroBg4 },
-  SignColumn = { fg = c_macroGray2 },
-  SpellBad = { underdashed = true },
-  SpellCap = { underdashed = true },
-  SpellLocal = { underdashed = true },
-  SpellRare = { underdashed = true },
-  StatusLine = { bg = c_macroBg3, fg = c_macroFg1 },
-  StatusLineNC = { bg = c_macroBg2, fg = c_macroBg5 },
-  Substitute = { bg = c_autumnRed, fg = c_macroFg0 },
-  TabLine = { link = 'StatusLineNC' },
-  TabLineFill = { link = 'Normal' },
-  TabLineSel = { link = 'StatusLine' },
-  TermCursor = { fg = c_macroBg1, bg = c_macroRed },
-  TermCursorNC = { fg = c_macroBg1, bg = c_macroAsh },
-  Title = { bold = true, fg = c_macroBlue1 },
-  Underlined = { fg = c_macroTeal, underline = true },
-  VertSplit = { link = 'WinSeparator' },
-  Visual = { bg = c_macroBg4 },
-  VisualNOS = { link = 'Visual' },
-  WarningMsg = { fg = c_roninYellow },
-  Whitespace = { fg = c_macroBg4 },
-  WildMenu = { link = 'Pmenu' },
-  WinBar = { bg = 'NONE', fg = c_macroFg1 },
-  WinBarNC = { link = 'WinBar' },
-  WinSeparator = { fg = c_macroBg4 },
-  lCursor = { link = 'Cursor' },
-  -- }}}2
-
-  -- Syntax {{{2
-  Boolean = { fg = c_macroOrange0, bold = true },
-  Character = { link = 'String' },
-  Comment = { fg = c_macroAsh },
-  Constant = { fg = c_macroOrange0 },
-  Delimiter = { fg = c_macroGray1 },
-  Error = { fg = c_lotusRed1 },
-  Exception = { fg = c_macroRed },
-  Float = { link = 'Number' },
-  Function = { fg = c_macroBlue1 },
-  Identifier = { fg = c_macroFg0 },
-  Keyword = { fg = c_macroViolet },
-  Number = { fg = c_macroPink },
-  Operator = { fg = c_macroRed },
-  PreProc = { fg = c_macroRed },
-  Special = { fg = c_macroTeal },
-  SpecialKey = { fg = c_macroGray2 },
-  Statement = { fg = c_macroViolet },
-  String = { fg = c_macroGreen1 },
-  Todo = { fg = c_macroBg0, bg = c_macroBlue0, bold = true },
-  Type = { fg = c_macroAqua },
-  -- }}}2
-
-  -- Treesitter syntax {{{2
-  ['@attribute'] = { link = 'Constant' },
-  ['@constructor'] = { fg = c_macroTeal },
-  ['@constructor.lua'] = { fg = c_macroViolet },
-  ['@keyword.exception'] = { bold = true, fg = c_macroRed },
-  ['@keyword.import'] = { link = 'PreProc' },
-  ['@keyword.luap'] = { link = '@string.regexp' },
-  ['@keyword.operator'] = { bold = true, fg = c_macroRed },
-  ['@keyword.return'] = { fg = c_macroRed, italic = true },
-  ['@module'] = { fg = c_macroOrange0 },
-  ['@operator'] = { link = 'Operator' },
-  ['@variable.parameter'] = { fg = c_macroGray0 },
-  ['@punctuation.bracket'] = { fg = c_macroGray1 },
-  ['@punctuation.delimiter'] = { fg = c_macroGray1 },
-  ['@markup.list'] = { fg = c_macroTeal },
-  ['@string.escape'] = { fg = c_macroOrange0 },
-  ['@string.regexp'] = { fg = c_macroOrange0 },
-  ['@markup.link.label.symbol'] = { fg = c_macroFg0 },
-  ['@tag.attribute'] = { fg = c_macroFg0 },
-  ['@tag.delimiter'] = { fg = c_macroGray1 },
-  ['@comment.error'] = { bg = c_lotusRed1, fg = c_macroFg0, bold = true },
-  ['@diff.plug'] = { fg = c_autumnGreen },
-  ['@diff.minus'] = { fg = c_autumnRed },
-  ['@markup.emphasis'] = { italic = true },
-  ['@markup.environment'] = { link = 'Keyword' },
-  ['@markup.environment.name'] = { link = 'String' },
-  ['@markup.raw'] = { link = 'String' },
-  ['@comment.info'] = { bg = c_waveAqua0, fg = c_waveBlue0, bold = true },
-  ['@markup.quote'] = { link = '@variable.parameter' },
-  ['@markup.strong'] = { bold = true },
-  ['@markup.heading'] = { link = 'Function' },
-  ['@markup.heading.1.markdown'] = { fg = c_macroRed },
-  ['@markup.heading.2.markdown'] = { fg = c_macroRed },
-  ['@markup.heading.3.markdown'] = { fg = c_macroRed },
-  ['@markup.heading.4.markdown'] = { fg = c_macroRed },
-  ['@markup.heading.5.markdown'] = { fg = c_macroRed },
-  ['@markup.heading.6.markdown'] = { fg = c_macroRed },
-  ['@markup.heading.1.marker.markdown'] = { link = 'Delimiter' },
-  ['@markup.heading.2.marker.markdown'] = { link = 'Delimiter' },
-  ['@markup.heading.3.marker.markdown'] = { link = 'Delimiter' },
-  ['@markup.heading.4.marker.markdown'] = { link = 'Delimiter' },
-  ['@markup.heading.5.marker.markdown'] = { link = 'Delimiter' },
-  ['@markup.heading.6.marker.markdown'] = { link = 'Delimiter' },
-  ['@comment.todo.checked'] = { fg = c_macroAsh },
-  ['@comment.todo.unchecked'] = { fg = c_macroRed },
-  ['@markup.link.label.markdown_inline'] = { link = 'htmlLink' },
-  ['@markup.link.url.markdown_inline'] = { link = 'htmlString' },
-  ['@comment.warning'] = { bg = c_roninYellow, fg = c_waveBlue0, bold = true },
-  ['@variable'] = { fg = c_macroFg0 },
-  ['@variable.builtin'] = { fg = c_macroRed, italic = true },
-  -- }}}
-
-  -- LSP semantic {{{2
-  ['@lsp.mod.readonly'] = { link = 'Constant' },
-  ['@lsp.mod.typeHint'] = { link = 'Type' },
-  ['@lsp.type.builtinConstant'] = { link = '@constant.builtin' },
-  ['@lsp.type.comment'] = { fg = 'NONE' },
-  ['@lsp.type.macro'] = { fg = c_macroPink },
-  ['@lsp.type.magicFunction'] = { link = '@function.builtin' },
-  ['@lsp.type.method'] = { link = '@function.method' },
-  ['@lsp.type.namespace'] = { link = '@module' },
-  ['@lsp.type.parameter'] = { link = '@variable.parameter' },
-  ['@lsp.type.selfParameter'] = { link = '@variable.builtin' },
-  ['@lsp.type.variable'] = { fg = 'NONE' },
-  ['@lsp.typemod.function.builtin'] = { link = '@function.builtin' },
-  ['@lsp.typemod.function.defaultLibrary'] = { link = '@function.builtin' },
-  ['@lsp.typemod.function.readonly'] = { bold = true, fg = c_macroBlue1 },
-  ['@lsp.typemod.keyword.documentation'] = { link = 'Special' },
-  ['@lsp.typemod.method.defaultLibrary'] = { link = '@function.builtin' },
-  ['@lsp.typemod.operator.controlFlow'] = { link = '@keyword.exception' },
-  ['@lsp.typemod.operator.injected'] = { link = 'Operator' },
-  ['@lsp.typemod.string.injected'] = { link = 'String' },
-  ['@lsp.typemod.variable.defaultLibrary'] = { link = 'Special' },
-  ['@lsp.typemod.variable.global'] = { link = 'Constant' },
-  ['@lsp.typemod.variable.injected'] = { link = '@variable' },
-  ['@lsp.typemod.variable.static'] = { link = 'Constant' },
-  -- }}}
-
-  -- LSP {{{2
-  LspCodeLens = { fg = c_macroAsh },
-  LspInfoBorder = { link = 'FloatBorder' },
-  LspReferenceRead = { link = 'LspReferenceText' },
-  LspReferenceText = { bg = c_winterYellow },
-  LspReferenceWrite = { bg = c_winterYellow, underline = true },
-  LspSignatureActiveParameter = { fg = c_roninYellow },
-  -- }}}
-
-  -- Diagnostic {{{2
-  DiagnosticError = { fg = c_macroRed },
-  DiagnosticHint = { fg = c_macroAqua },
-  DiagnosticInfo = { fg = c_macroBlue1 },
-  DiagnosticOk = { fg = c_macroGreen1 },
-  DiagnosticWarn = { fg = c_carpYellow },
-  DiagnosticSignError = { fg = c_macroRed },
-  DiagnosticSignHint = { fg = c_macroAqua },
-  DiagnosticSignInfo = { fg = c_macroBlue1 },
-  DiagnosticSignWarn = { fg = c_carpYellow },
-  DiagnosticUnderlineError = { sp = c_macroRed, undercurl = true },
-  DiagnosticUnderlineHint = { sp = c_macroAqua, undercurl = true },
-  DiagnosticUnderlineInfo = { sp = c_macroBlue1, undercurl = true },
-  DiagnosticUnderlineWarn = { sp = c_carpYellow, undercurl = true },
-  DiagnosticVirtualTextError = { bg = c_winterRed, fg = c_macroRed },
-  DiagnosticVirtualTextHint = { bg = c_winterGreen, fg = c_macroAqua },
-  DiagnosticVirtualTextInfo = { bg = c_winterBlue, fg = c_macroBlue1 },
-  DiagnosticVirtualTextWarn = { bg = c_winterYellow, fg = c_carpYellow },
-  -- }}}
-
-  -- Filetype {{{2
-  -- Git
-  gitHash = { fg = c_macroAsh },
-
-  -- Sh/Bash
-  bashSpecialVariables = { link = 'Constant' },
-  shAstQuote = { link = 'Constant' },
-  shCaseEsac = { link = 'Operator' },
-  shDeref = { link = 'Special' },
-  shDerefSimple = { link = 'shDerefVar' },
-  shDerefVar = { link = 'Constant' },
-  shNoQuote = { link = 'shAstQuote' },
-  shQuote = { link = 'String' },
-  shTestOpr = { link = 'Operator' },
-
-  -- HTML
-  htmlBold = { bold = true },
-  htmlBoldItalic = { bold = true, italic = true },
-  htmlH1 = { fg = c_macroRed, bold = true },
-  htmlH2 = { fg = c_macroRed, bold = true },
-  htmlH3 = { fg = c_macroRed, bold = true },
-  htmlH4 = { fg = c_macroRed, bold = true },
-  htmlH5 = { fg = c_macroRed, bold = true },
-  htmlH6 = { fg = c_macroRed, bold = true },
-  htmlItalic = { italic = true },
-  htmlLink = { fg = c_lotusBlue, underline = true },
-  htmlSpecialChar = { link = 'SpecialChar' },
-  htmlSpecialTagName = { fg = c_macroViolet },
-  htmlString = { fg = c_macroAsh },
-  htmlTagName = { link = 'Tag' },
-  htmlTitle = { link = 'Title' },
-
-  -- Markdown
-  markdownBold = { bold = true },
-  markdownBoldItalic = { bold = true, italic = true },
-  markdownCode = { fg = c_macroGreen1 },
-  markdownCodeBlock = { fg = c_macroGreen1 },
-  markdownError = { link = 'NONE' },
-  markdownEscape = { fg = 'NONE' },
-  markdownH1 = { link = 'htmlH1' },
-  markdownH2 = { link = 'htmlH2' },
-  markdownH3 = { link = 'htmlH3' },
-  markdownH4 = { link = 'htmlH4' },
-  markdownH5 = { link = 'htmlH5' },
-  markdownH6 = { link = 'htmlH6' },
-  markdownListMarker = { fg = c_autumnYellow },
-
-  -- Checkhealth
-  healthError = { fg = c_lotusRed0 },
-  healthSuccess = { fg = c_springGreen },
-  healthWarning = { fg = c_roninYellow },
-  helpHeader = { link = 'Title' },
-  helpSectionDelim = { link = 'Title' },
-
-  -- Qf
-  qfFileName = { link = 'Directory' },
-  qfLineNr = { link = 'lineNr' },
-  -- }}}
-
-  -- Plugins {{{2
-  -- nvim-cmp
-  CmpCompletion = { link = 'Pmenu' },
-  CmpCompletionBorder = { bg = c_waveBlue0, fg = c_waveBlue1 },
-  CmpCompletionSbar = { link = 'PmenuSbar' },
-  CmpCompletionSel = { bg = c_waveBlue1, fg = 'NONE' },
-  CmpCompletionThumb = { link = 'PmenuThumb' },
-  CmpDocumentation = { link = 'NormalFloat' },
-  CmpDocumentationBorder = { link = 'FloatBorder' },
-  CmpItemAbbr = { fg = c_macroFg2 },
-  CmpItemAbbrDeprecated = { fg = c_macroAsh, strikethrough = true },
-  CmpItemAbbrMatch = { fg = c_macroRed },
-  CmpItemAbbrMatchFuzzy = { link = 'CmpItemAbbrMatch' },
-  CmpItemKindClass = { link = 'Type' },
-  CmpItemKindConstant = { link = 'Constant' },
-  CmpItemKindConstructor = { link = '@constructor' },
-  CmpItemKindCopilot = { link = 'String' },
-  CmpItemKindDefault = { fg = c_macroGray2},
-  CmpItemKindEnum = { link = 'Type' },
-  CmpItemKindEnumMember = { link = 'Constant' },
-  CmpItemKindField = { link = '@variable.member' },
-  CmpItemKindFile = { link = 'Directory' },
-  CmpItemKindFolder = { link = 'Directory' },
-  CmpItemKindFunction = { link = 'Function' },
-  CmpItemKindInterface = { link = 'Type' },
-  CmpItemKindKeyword = { link = '@keyword' },
-  CmpItemKindMethod = { link = 'Function' },
-  CmpItemKindModule = { link = '@keyword.import' },
-  CmpItemKindOperator = { link = 'Operator' },
-  CmpItemKindProperty = { link = '@property' },
-  CmpItemKindReference = { link = 'Type' },
-  CmpItemKindSnippet = { fg = c_macroTeal },
-  CmpItemKindStruct = { link = 'Type' },
-  CmpItemKindText = { fg = c_macroFg2 },
-  CmpItemKindTypeParameter = { link = 'Type' },
-  CmpItemKindValue = { link = 'String' },
-  CmpItemKindVariable = { fg = c_lotusRed2 },
-  CmpItemMenu = { fg = c_macroAsh },
-
-  -- gitsigns
-  GitSignsAdd = { fg = c_autumnGreen },
-  GitSignsChange = { fg = c_sumiInk6 },
-  GitSignsDelete = { fg = c_lotusRed0 },
-  GitSignsDeletePreview = { bg = c_winterRed },
-
-  -- fugitive
-  DiffAdded = { fg = c_autumnGreen },
-  DiffChanged = { fg = c_autumnYellow },
-  DiffDeleted = { fg = c_autumnRed },
-  DiffNewFile = { fg = c_autumnGreen },
-  DiffOldFile = { fg = c_autumnRed },
-  DiffRemoved = { fg = c_autumnRed },
-  fugitiveHash = { link = 'gitHash' },
-  fugitiveHeader = { link = 'Title' },
-  fugitiveStagedModifier = { fg = c_autumnGreen },
-  fugitiveUnstagedModifier = { fg = c_autumnYellow },
-  fugitiveUntrackedModifier = { fg = c_macroAqua },
-
-  -- telescope
-  TelescopeBorder = { bg = c_macroBg1, fg = c_sumiInk6 },
-  TelescopeMatching = { fg = c_macroRed, bold = true },
-  TelescopeNormal = { fg = c_macroFg2, bg = c_macroBg2 },
-  TelescopeResultsClass = { link = 'Structure' },
-  TelescopeResultsField = { link = '@variable.member' },
-  TelescopeResultsMethod = { link = 'Function' },
-  TelescopeResultsStruct = { link = 'Structure' },
-  TelescopeResultsVariable = { link = '@variable' },
-  TelescopeSelection = { link = 'Visual' },
-  TelescopeTitle = { fg = c_macroGray2 },
-
-  -- nvim-dap-ui
-  DapUIBreakpointsCurrentLine = { bold = true, fg = c_macroFg0 },
-  DapUIBreakpointsDisabledLine = { link = 'Comment' },
-  DapUIBreakpointsInfo = { fg = c_macroBlue0 },
-  DapUIBreakpointsPath = { link = 'Directory' },
-  DapUIDecoration = { fg = c_sumiInk6 },
-  DapUIFloatBorder = { fg = c_sumiInk6 },
-  DapUILineNumber = { fg = c_macroTeal },
-  DapUIModifiedValue = { bold = true, fg = c_macroTeal },
-  DapUIPlayPause = { fg = c_macroGreen1 },
-  DapUIRestart = { fg = c_macroGreen1 },
-  DapUIScope = { link = 'Special' },
-  DapUISource = { fg = c_macroRed },
-  DapUIStepBack = { fg = c_macroTeal },
-  DapUIStepInto = { fg = c_macroTeal },
-  DapUIStepOut = { fg = c_macroTeal },
-  DapUIStepOver = { fg = c_macroTeal },
-  DapUIStop = { fg = c_lotusRed0 },
-  DapUIStoppedThread = { fg = c_macroTeal },
-  DapUIThread = { fg = c_macroFg0 },
-  DapUIType = { link = 'Type' },
-  DapUIUnavailable = { fg = c_macroAsh },
-  DapUIWatchesEmpty = { fg = c_lotusRed0 },
-  DapUIWatchesError = { fg = c_lotusRed0 },
-  DapUIWatchesValue = { fg = c_macroFg0 },
-
-  -- lazy.nvim
-  LazyProgressTodo = { fg = c_macroBg5 },
-
-  -- statusline
-  StatusLineGitAdded = { bg = c_macroBg3, fg = c_macroGreen1 },
-  StatusLineGitChanged = { bg = c_macroBg3, fg = c_carpYellow },
-  StatusLineGitRemoved = { bg = c_macroBg3, fg = c_macroRed },
-  StatusLineHeader = { bg = c_macroBg5, fg = c_macroFg1 },
-  StatusLineHeaderModified = { bg = c_macroRed, fg = c_macroBg1 },
-
-  -- }}}
-}
--- }}}1
-
--- Highlight group overrides {{{1
-hlgroups.CursorLine = { bg = c_macroBg2 }
-hlgroups.DiagnosticSignWarn = { fg = c_autumnYellow }
-hlgroups.DiagnosticUnderlineWarn = { sp = c_autumnYellow, undercurl = true }
-hlgroups.DiagnosticVirtualTextWarn =
-  { bg = c_winterYellow, fg = c_autumnYellow }
-hlgroups.DiagnosticWarn = { fg = c_autumnYellow }
-hlgroups.IncSearch = { bg = c_autumnYellow, fg = c_macroBg0, bold = true }
-hlgroups.Keyword = { fg = c_macroRed }
-hlgroups.ModeMsg = { fg = c_macroRed, bold = true }
-hlgroups.Pmenu = { bg = c_macroBg0, fg = c_macroFg1 }
-hlgroups.PmenuSbar = { bg = c_macroBg2 }
-hlgroups.PmenuSel = { bg = c_macroFg0, fg = c_macroBg0 }
-hlgroups.PmenuThumb = { bg = c_macroBg4 }
-hlgroups.Search = { bg = c_macroBg3 }
-hlgroups.StatusLine = { bg = c_macroBg0 }
-hlgroups.StatusLineGitAdded = { bg = c_macroBg0, fg = c_macroGreen1 }
-hlgroups.StatusLineGitChanged = { bg = c_macroBg0, fg = c_autumnYellow }
-hlgroups.StatusLineGitRemoved = { bg = c_macroBg0, fg = c_macroRed }
-hlgroups.StatusLineHeader = { bg = c_macroFg0, fg = c_macroBg0 }
-hlgroups.StatusLineHeaderModified = { bg = c_macroRed, fg = c_macroBg0 }
-hlgroups.Visual = { bg = c_macroBg3 }
-hlgroups['@variable.parameter'] = { link = 'Identifier' }
--- }}}1
-
--- Set highlight groups {{{1
-for hlgroup_name, hlgroup_attr in pairs(hlgroups) do
-  vim.api.nvim_set_hl(0, hlgroup_name, hlgroup_attr)
+-- Clear existing highlights and set colorscheme name
+vim.cmd('highlight clear')
+if vim.fn.exists('syntax_on') then
+  vim.cmd('syntax reset')
 end
--- }}}1
+
+vim.g.colors_name = 'minilight'
+
+
+-- dark palette
+local col_d = {
+  bg = '#1e1e1e',
+  fg2 = '#4e4b42',
+  fg = '#635f54',
+
+  -- general
+  white = '#ebe6d2',
+  red = '#bd9d83',
+  green = '#a4a48c',
+  yellow = '#e1d8aa',
+  blue = '#8b98a3',
+  cyan = '#8ba3a3',
+  magenta = '#a38ba0',
+  black = '#000000',
+  gray = '#808080',
+
+  -- vim/code specific
+  comment = '#635f54',
+  selection = '#4e4b42',
+  line_number = '#858585',
+  -- text = '',
+}
+
+-- light palette
+local col_l = {
+  bg = '#cdc8b0',
+  fg = '#4e4b42',
+}
+
+-- Helper function to set highlights
+local function hl(group, opts)
+  vim.api.nvim_set_hl(0, group, opts)
+end
+
+-- Basic UI highlights
+hl('Normal', { fg = col_d.fg, bg = col_d.bg })
+hl('CursorLine', { bg = '#2d2d2d' })
+hl('LineNr', { fg = col_d.line_number })
+hl('CursorLineNr', { fg = col_d.yellow, bold = true })
+hl('Visual', { bg = col_d.selection })
+hl('Search', { fg = col_d.black, bg = col_d.yellow })
+hl('StatusLine', { fg = col_d.fg, bg = '#007acc' })
+hl('VertSplit', { fg = col_d.gray })
+
+-- Syntax highlighting
+hl('Comment', { fg = col_d.comment, italic = true })
+hl('Constant', { fg = col_d.blue })
+hl('String', { fg = col_d.green })
+hl('Character', { fg = col_d.green })
+hl('Number', { fg = col_d.cyan })
+hl('Boolean', { fg = col_d.blue })
+hl('Float', { fg = col_d.cyan })
+
+hl('Identifier', { fg = col_d.blue })
+hl('Function', { fg = col_d.yellow })
+
+hl('Statement', { fg = col_d.magenta })
+hl('Conditional', { fg = col_d.magenta })
+hl('Repeat', { fg = col_d.magenta })
+hl('Label', { fg = col_d.magenta })
+hl('Operator', { fg = col_d.fg })
+hl('Keyword', { fg = col_d.blue })
+hl('Exception', { fg = col_d.magenta })
+
+hl('PreProc', { fg = col_d.magenta })
+hl('Include', { fg = col_d.magenta })
+hl('Define', { fg = col_d.magenta })
+hl('Macro', { fg = col_d.magenta })
+hl('PreCondit', { fg = col_d.magenta })
+
+hl('Type', { fg = col_d.blue })
+hl('StorageClass', { fg = col_d.blue })
+hl('Structure', { fg = col_d.blue })
+hl('Typedef', { fg = col_d.blue })
+
+hl('Special', { fg = col_d.yellow })
+hl('SpecialChar', { fg = col_d.yellow })
+hl('Tag', { fg = col_d.red })
+hl('Delimiter', { fg = col_d.fg })
+hl('SpecialComment', { fg = col_d.comment })
+hl('Debug', { fg = col_d.red })
+
+-- Error and warning highlights
+hl('Error', { fg = col_d.red, bold = true })
+hl('ErrorMsg', { fg = col_d.red, bold = true })
+hl('WarningMsg', { fg = col_d.yellow, bold = true })
+
+-- Diff highlights
+hl('DiffAdd', { fg = col_d.green })
+hl('DiffChange', { fg = col_d.yellow })
+hl('DiffDelete', { fg = col_d.red })
+hl('DiffText', { fg = col_d.blue, bold = true })
+
+

@@ -16,13 +16,13 @@ local MASON_ENSURE_INSTALLED = {
   "basedpyright",
   "lua-language-server",
   "clangd",
-  "typescript-language-server"
+  "typescript-language-server",
+  "vtsls"
 }
 
 --------------------------------------------------
 
 local configs = {
-
 luals = {
   cmd = { join_paths(BIN_PATH, "lua-language-server") },
   filetypes = {'lua'},
@@ -50,7 +50,7 @@ pylsp = {
 
 tsls = {
   cmd = {
-    join_paths(BIN_PATH, "typescript-language-server"),
+    join_paths(BIN_PATH, "vtsls"),
     "--stdio"
   },
   filetypes = {'typescript', 'javascript'},
@@ -62,7 +62,6 @@ cxxls = {
   filetypes = {'c', 'cpp', 'cuda'},
   root_markers = {"Makefile", "CMakeLists.txt"}
 }
-
 } -- /configs
 
 --------------------------------------------------

@@ -8,7 +8,7 @@ local plugs = {
 }
 
 ------------------------------------------------------
---                    Utility 
+--                    Utility
 ------------------------------------------------------
 
 -- search working directory
@@ -19,7 +19,8 @@ end
 
 -- search current buffer
 local search_buf = function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+  local builtin = require('telescope.builtin')
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     previewer = true,
   })
 end
@@ -62,11 +63,14 @@ local config = function()
       }
     }
   }
-  vim.keymap.set('n', '<leader><space>', search_wdir, {desc = 'Live grep in working directory'})
+
+  -- keymaps
+  vim.keymap.set('n', '<leader>g', search_wdir, {desc = 'Live grep in working directory'})
   vim.keymap.set('n', '<leader>f', search_files, {desc = 'Search all files in working dir'})
   vim.keymap.set('n', '<leader>F', builtin.git_files, {desc = 'Search git tracked files in working dir'})
   vim.keymap.set('n', '<leader>/', search_buf, {desc = '[/] Fuzzily search in current buffer'})
-  vim.api.nvim_create_user_command("Git", builtin.git_status, {})
+  vim.keymap.set('n', '<leader><space>', builtin.resume, {desc = 'Resume last search'})
+
 end
 
 return {

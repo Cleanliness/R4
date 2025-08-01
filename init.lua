@@ -1,10 +1,14 @@
 -- Entry point on nvim startup if you forgor
+
 -- Basic settings that don't require plugins
 require('core.options')
+require('core.colorcolumn')
+require('core.clipboard')
+require('core.winbar').setup()
 require('custom.diagnostic')
 
 ------------------------------------------------------
---                  init Lazy.nvim 
+--                  init Lazy.nvim
 ------------------------------------------------------
 -- this concats lazy.nvim to stdpath
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -22,23 +26,20 @@ vim.opt.rtp:prepend(lazypath)              -- this ensures require('lazy') works
 
 
 ------------------------------------------------------
---                      Setup
+--                   Plugin Setup
 ------------------------------------------------------
 --  NOTE: You can configure plugins after the setup call,
 --  as they will be available in your neovim runtime.
 
 require('lazy').setup({
-  'navarasu/onedark.nvim',
   'tpope/vim-sleuth',
+  'lewis6991/gitsigns.nvim',
 
+  require('plugins.color'),
   require('plugins.ui.telescope').plugs,      -- search
-  require('plugins.treesitter').plugs,     -- highlighting and more 
-  require('plugins.lsp').plugs,            -- all LSP stuff
-  -- require('plugins.blink_cmp').plugs,      -- completion
-  require('plugins.ui.files').plugs,       -- file explorer
-
-  -- QOL
-  require('plugins.swenv').plugs,          -- switch python environments
+  require('plugins.treesitter').plugs,        -- highlighting and more 
+  require('plugins.lsp').plugs,               -- LSP stuff
+  require('plugins.blink_cmp').plugs,         -- completion
 }, {})
 
 ------------------------------------------------------
@@ -48,19 +49,8 @@ require('lazy').setup({
 -- and you can now configure them
 
 require('plugins.lsp').config()
-require('plugins.swenv').config()
 require('plugins.ui.telescope').config()
 require('plugins.treesitter').config()
-require('plugins.ui.files').config()
-
------------------------------------------------------
-
-require('onedark').setup({
-    style = 'light',
-    toggle_style_key = "<leader>ts",
-    toggle_style_list = {'cool', 'light'},
-})
-require('onedark').load()
 
 ------------------------------------------------------
 --                post-config things
@@ -75,6 +65,7 @@ require('custom.doc')
 require('custom.quickfix')
 require('custom.gpt')
 require('custom.cmp')
+require('custom.git')
 
 
 -- Highlight on yank

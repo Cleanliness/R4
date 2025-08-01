@@ -33,7 +33,6 @@ opt.virtualedit    = 'block'
 wo.number = true                        -- Make line numbers default
 opt.hlsearch = false                    -- Set highlight on search
 opt.mouse = 'a'                         -- Enable mouse mode
-opt.clipboard = 'unnamedplus'           -- Sync clipboard between OS and Neovim.
 opt.breakindent = true                  -- Enable break indent
 opt.undofile = true                     -- Save undo history
 
@@ -52,14 +51,11 @@ opt.termguicolors = true                -- NOTE: You should make sure your termi
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.list = true
-opt.listchars = 'tab:▸ ,trail:·,nbsp:·,precedes:←,extends:→'
+opt.listchars = 'tab:| ,trail:·,nbsp:·,'
 
 -- Leader to space
 g.mapleader = " "
 
--- completion
-opt.completeopt = "menuone,noinsert,noselect,preview"
-opt.complete = ".,w,b,u,t,i"
 
 ---------------------- Neovide ----------------------
 -- https://neovide.dev/configuration.html
@@ -67,21 +63,4 @@ vim.g.neovide_scale_factor = 0.7
 vim.g.neovide_scroll_animation_length = 0.15
 vim.g.neovide_cursor_animation_length = 0.10
 
---------------------- clipboard ---------------------
 
--- WSL case
-if vim.fn.has('wsl') == 1 then
-    vim.g.neovide_scale_factor = 0.5
-    vim.g.clipboard = {
-        name = 'WslClipboard',
-        copy = {
-            ['+'] = 'clip.exe',
-            ['*'] = 'clip.exe',
-        },
-        paste = {
-            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        },
-        cache_enabled = 0,
-    }
-end
