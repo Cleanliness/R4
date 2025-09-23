@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd({"TermOpen"}, {
     vim.wo.relativenumber = false
     vim.wo.signcolumn = "no"
 
-    local curr_env = require('util.conda').current_env()
+    local curr_env = require('util.conda').get_current_env()
     if curr_env then
       _activate_conda_env(args.buf, curr_env)
     end

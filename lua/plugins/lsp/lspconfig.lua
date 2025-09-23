@@ -5,6 +5,11 @@ local function join_paths(...)
   return table.concat({...}, separator)
 end
 
+
+-- TODO:
+-- Mason's basedpyright and clangd are huge ~280M
+-- ensure_installed doesn't wait for mason index to pop
+
 --------------------------------------------------
 
 -- ~/.local/share/nvim/mason/bin

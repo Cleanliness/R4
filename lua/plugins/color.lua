@@ -8,7 +8,7 @@ local config = function ()
   require('onedark').setup {
     toggle_style_key = "<leader>ts",
     style = "dark",
-   toggle_style_list = {"light", "dark"},
+    toggle_style_list = {"light", "dark"},
     code_style = {
       comments = 'none',
       keywords = 'none',
@@ -16,6 +16,10 @@ local config = function ()
       strings = 'none',
       variables = 'none'
     },
+    highlights = vim.tbl_extend("force",
+      require("plugins.ui.telescope.hl"),
+      {}
+    ),
   }
 
   -- Enable theme

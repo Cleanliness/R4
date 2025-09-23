@@ -41,6 +41,8 @@ local config = function()
 
   tele.setup {
     defaults = {
+      theme = "center",
+
       mappings = {
         i = {
           ['<C-u>'] = false,
