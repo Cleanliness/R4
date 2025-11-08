@@ -1,11 +1,11 @@
--- Use language server features in Neovim
---   i.e. Code completion, go to def, find references, etc.
+-- code intelligence stuff
+--   i.e. completion, go to def, find references, etc.
 --   https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#languageServerProtocol
 -- Debugging:
 --   `:checkhealth vim.lsp`
 
 
--- Note: requires git, curl/wget, unzip, tar, gzip
+-- Note: this requires git, curl/wget, unzip, tar, gzip
 -- see :h mason-requirements
 local plugs = {
   {'williamboman/mason.nvim'},           -- Easily install LSP servers

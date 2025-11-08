@@ -37,7 +37,7 @@ require('lazy').setup({
 
   require('plugins.color'),
   require('plugins.ui.telescope').plugs,      -- search
-  require('plugins.treesitter').plugs,        -- highlighting and more 
+  require('plugins.treesitter').plugs,        -- ast hl
   require('plugins.lsp').plugs,               -- LSP stuff
   require('plugins.blink_cmp').plugs,         -- completion
 }, {})

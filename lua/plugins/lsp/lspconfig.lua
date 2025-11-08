@@ -8,7 +8,7 @@ end
 
 -- TODO:
 -- Mason's basedpyright and clangd are huge ~280M
--- ensure_installed doesn't wait for mason index to pop
+-- ensure_installed doesn't wait for mason index to load
 
 --------------------------------------------------
 
@@ -21,8 +21,7 @@ local MASON_ENSURE_INSTALLED = {
   "basedpyright",
   "lua-language-server",
   "clangd",
-  "typescript-language-server",
-  "vtsls"
+  "vtsls",
 }
 
 --------------------------------------------------
@@ -66,7 +65,25 @@ cxxls = {
   cmd = { join_paths(BIN_PATH, "clangd") },
   filetypes = {'c', 'cpp', 'cuda'},
   root_markers = {"Makefile", "CMakeLists.txt"}
+},
+
+rsls = {
+  cmd = { join_paths(BIN_PATH, "rust-analyzer") },
+  filetypes = {'rust'},
+  root_markers = { "Cargo.toml", "rust-project.json" },
+  -- settings = {
+  --   ['rust-analyzer'] = {
+  --     cargo = {
+  --       allFeatures = true,
+  --       loadOutDirsFromCheck = true,
+  --     },
+  --     procMacro = {
+  --       enable = true,
+  --     },
+  --   }
+  -- }
 }
+
 } -- /configs
 
 --------------------------------------------------

@@ -4,15 +4,16 @@
 --                   Helpers
 --------------------------------------------------
 
--- activate conda environment given term buffer
--- and environment name
-local _activate_conda_env = function(bufnr, env)
-  local chan_id = vim.bo[bufnr].channel
-  if env and chan_id then
-    vim.api.nvim_chan_send(chan_id, string.format('conda activate %s\n', env))
-    vim.api.nvim_chan_send(chan_id, "clear\n")
+local function shell_init()
+  -- NOTE: this depends on _CONDA_INIT_ENV in .bashrc
+  local conda_init = ""
+  local conda_env = require('util.conda').get_current_env()
+  if conda_env then
+    conda_init = "env _CONDA_INIT_ENV=" .. conda_env .. " "
   end
+  vim.o.shell = conda_init .. 'bash'
 end
+
 
 --------------------------------------------------
 --              Auto commands
@@ -25,11 +26,6 @@ vim.api.nvim_create_autocmd({"TermOpen"}, {
     vim.wo.number = false
     vim.wo.relativenumber = false
     vim.wo.signcolumn = "no"
-
-    local curr_env = require('util.conda').get_current_env()
-    if curr_env then
-      _activate_conda_env(args.buf, curr_env)
-    end
 
     -- qol
     vim.cmd([[ startinsert ]])        -- auto enter terminal insert mode
@@ -47,13 +43,21 @@ vim.api.nvim_create_autocmd({"TermEnter", "BufEnter"}, {
 --------------------------------------------
 --             User Commands
 --------------------------------------------
+-- vert/horiz terminal shortcuts with bang support
+-- and arg forwarding
 
 -- open terminal in vertical split
-vim.api.nvim_create_user_command('Verm', function()
-  vim.cmd('vsplit | terminal')
-end, {})
+vim.api.nvim_create_user_command('Verm', function(opts)
+  local pos = opts.bang and 'leftabove vsplit' or 'vsplit'
+  vim.cmd(pos .. ' | terminal ' .. opts.args)
+end, { nargs = '*', bang = true })
 
 -- open terminal in horizontal split
-vim.api.nvim_create_user_command('Herm', function()
-  vim.cmd('split | terminal')
-end, {})
+vim.api.nvim_create_user_command('Herm', function(opts)
+  local pos = opts.bang and 'leftabove split' or 'split'
+  -- vim.cmd(pos .. ' | terminal ' .. opts.args)
+  vim.cmd(pos .. ' | resize ' .. math.floor(vim.o.lines * 0.25) .. ' | terminal ' .. opts.args)
+end, { nargs = '*', bang = true })
+
+shell_init()
+
