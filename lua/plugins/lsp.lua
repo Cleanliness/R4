@@ -7,13 +7,11 @@
 
 -- Note: this requires git, curl/wget, unzip, tar, gzip
 -- see :h mason-requirements
-local plugs = {
-  {'williamboman/mason.nvim'},           -- Easily install LSP servers
-}
 
 ------------------------------------------------------
 --                     Helpers
 ------------------------------------------------------
+
 local map = function(type, key, value)
   vim.api.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
 end
@@ -69,7 +67,7 @@ end
 
 ------------------------------------------------------
 
-local function lsp_attach(args)
+local function on_lsp_attach(args)
   init_lsp_highlight_hover(args)
   -- init_lsp_completion(args)
 
@@ -107,11 +105,11 @@ local config = function()
   mason_config()
 
   vim.api.nvim_create_autocmd("LspAttach", {
-    callback = lsp_attach,
+    callback = on_lsp_attach,
   })
 end
 
 return {
-  plugs = plugs,
   config = config,
 }
+

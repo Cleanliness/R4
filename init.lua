@@ -1,6 +1,6 @@
 -- Entry point on nvim startup if you forgor
 
--- Basic settings that don't require plugins
+-- Basic settings that independent of plugins
 require('core.options')
 require('core.colorcolumn')
 require('core.clipboard')
@@ -8,64 +8,68 @@ require('core.winbar').setup()
 require('custom.diagnostic')
 
 ------------------------------------------------------
---                  init Lazy.nvim
-------------------------------------------------------
--- this concats lazy.nvim to stdpath
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then     -- first time clone
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable',
-    lazypath,
-  }
-end
-vim.opt.rtp:prepend(lazypath)              -- this ensures require('lazy') works
-
-
-------------------------------------------------------
 --                   Plugin Setup
 ------------------------------------------------------
 --  NOTE: You can configure plugins after the setup call,
 --  as they will be available in your neovim runtime.
 
-require('lazy').setup({
-  'tpope/vim-sleuth',
-  'lewis6991/gitsigns.nvim',
+vim.pack.add({
+  'https://github.com/nvim-lua/plenary.nvim',                    -- telescope dep
+  'https://github.com/tpope/vim-sleuth',                         -- auto indent
+  'https://github.com/lewis6991/gitsigns.nvim',
+  "https://github.com/folke/zen-mode.nvim",                      -- vcenter buf
 
-  require('plugins.color'),
-  require('plugins.ui.telescope').plugs,      -- search
-  require('plugins.treesitter').plugs,        -- ast hl
-  require('plugins.lsp').plugs,               -- LSP stuff
-  require('plugins.blink_cmp').plugs,         -- completion
-}, {})
+  -- requires config
+  "https://github.com/navarasu/onedark.nvim",
+  'https://github.com/williamboman/mason.nvim',               -- Easily install LSP servers
+  {
+      src = 'https://github.com/nvim-telescope/telescope.nvim',
+      version = '0.1.x',
+  },
+  {
+    src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+    version = 'master',
+  },
+  {
+    src = 'https://github.com/saghen/blink.cmp',
+    version = vim.version.range("^1"),
+  }
+})
+
+  -- x require('plugins.color'),
+  -- x require('plugins.ui.telescope').plugs,      -- search
+  -- x require('plugins.treesitter').plugs,        -- ast hl
+  -- x require('plugins.lsp').plugs,               -- LSP stuff
+
+  -- require('plugins.blink_cmp').plugs,         -- completion
 
 ------------------------------------------------------
 --                     Config
 ------------------------------------------------------
--- At this point, all plugins are loaded/built 
--- and you can now configure them
+-- At this point, all plugins are loaded/built
+-- and configurable
 
+-- TODO:
 require('plugins.lsp').config()
-require('plugins.ui.telescope').config()
+require('plugins.color').config()
+require('plugins.telescope').config()
 require('plugins.treesitter').config()
+require('plugins.blink_cmp').config()
+
 
 ------------------------------------------------------
 --                post-config things
 ------------------------------------------------------
--- Things that should happen after the plugins are fully
--- loaded and configured
-
 require('core.keymaps')
 require('custom.netrw')
 require('custom.term')
+
+-- telescope.* not working
 require('custom.doc')
+require('custom.git')
 require('custom.quickfix')
 require('custom.gpt')
 require('custom.cmp')
-require('custom.git')
 
 
 -- Highlight on yank

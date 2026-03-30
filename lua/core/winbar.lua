@@ -4,12 +4,13 @@ local M = {}
 
 M.config = {
   enabled = true,
-  show_file_path = true,        -- relative to cwd
-  show_modified = true,         -- file modified indicator
-  show_readonly = true,         -- read only indicator
-  show_treesitter_scope = true, -- show current function/class context
-  max_path_length = 80,         -- truncation limit
-  max_scope_length = 30,        -- treesitter scope truncation limit
+  show_file_name = false,
+  show_file_path = false,        -- relative to cwd
+  show_modified = true,          -- file modified indicator
+  show_readonly = true,          -- read only indicator
+  show_treesitter_scope = true,  -- show current function/class context
+  max_path_length = 80,          -- truncation limit
+  max_scope_length = 30,         -- treesitter scope truncation limit
 
   -- Icons
   icons = {
@@ -23,7 +24,7 @@ M.config = {
 
   -- Highlight groups (matching statusline)
   highlights = {
-    background = "StatusLine",
+    background = "$fg",
     path = "StatusLine",
     file_name = "StatusLine",
     modified = "StatusLine",
@@ -97,6 +98,10 @@ end
 
 -- Get file path relative to current working directory
 local function get_file_path()
+  if not M.config.show_file_name then
+    return ""
+  end
+
   local filepath = vim.fn.expand("%:~:.")
 
   if not M.config.show_file_path then
@@ -255,7 +260,7 @@ end
 --                 Construction
 --------------------------------------------------
 
-function M.get_winbar()
+function M.create_winbar()
   if not M.config.enabled or not should_show_winbar() then
     return ""
   end
@@ -300,7 +305,7 @@ function M.setup(opts)
     group = group,
     callback = function()
       if should_show_winbar() then
-        vim.wo.winbar = M.get_winbar()
+        vim.wo.winbar = M.create_winbar()
       else
         vim.wo.winbar = nil
       end
@@ -311,7 +316,7 @@ end
 -- Manual update function
 function M.update()
   if should_show_winbar() then
-    vim.wo.winbar = M.get_winbar()
+    vim.wo.winbar = M.create_winbar()
   else
     vim.wo.winbar = nil
   end

@@ -1,8 +1,8 @@
-local init_dl_toggle = function ()
-  vim.keymap.set('n', '<leader>ts', function()
-    vim.o.background = vim.o.background == 'light' and 'dark' or 'light'
-  end, { desc = 'Toggle light/dark background' })
-end
+-- local init_dl_toggle = function ()
+--   vim.keymap.set('n', '<leader>ts', function()
+--     vim.o.background = vim.o.background == 'light' and 'dark' or 'light'
+--   end, { desc = 'Toggle light/dark background' })
+-- end
 
 local config = function ()
   require('onedark').setup {
@@ -16,18 +16,14 @@ local config = function ()
       strings = 'none',
       variables = 'none'
     },
-    highlights = vim.tbl_extend("force",
-      require("plugins.ui.telescope.hl"),
-      {}
-    ),
   }
 
   -- Enable theme
   require('onedark').load()
 end
 
+
 return {
-  "navarasu/onedark.nvim",
-  priority = 1000, -- make sure to load this before all the other start plugins
   config = config
 }
+

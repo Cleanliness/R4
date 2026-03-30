@@ -1,12 +1,4 @@
 -- Fuzzy Finder (files, lsp, etc)
-local plugs = {
-    'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-}
-
 ------------------------------------------------------
 --                    Utility
 ------------------------------------------------------
@@ -75,7 +67,8 @@ local config = function()
 
 end
 
+------------------------------------------------------
+
 return {
-  plugs = plugs,
   config = config
 }
