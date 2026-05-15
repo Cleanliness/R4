@@ -21,27 +21,18 @@ vim.pack.add({
 
   -- requires config
   "https://github.com/navarasu/onedark.nvim",
-  'https://github.com/williamboman/mason.nvim',               -- Easily install LSP servers
   {
-      src = 'https://github.com/nvim-telescope/telescope.nvim',
-      version = '0.1.x',
+    src = 'https://github.com/nvim-telescope/telescope.nvim',
   },
   {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
-    version = 'master',
+    version = 'main',
   },
   {
     src = 'https://github.com/saghen/blink.cmp',
     version = vim.version.range("^1"),
   }
 })
-
-  -- x require('plugins.color'),
-  -- x require('plugins.ui.telescope').plugs,      -- search
-  -- x require('plugins.treesitter').plugs,        -- ast hl
-  -- x require('plugins.lsp').plugs,               -- LSP stuff
-
-  -- require('plugins.blink_cmp').plugs,         -- completion
 
 ------------------------------------------------------
 --                     Config

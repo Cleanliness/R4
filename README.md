@@ -34,8 +34,7 @@ Tracking to remember what I've added.
 
 ### With Plugins (9)
 - TS parser installation for highlighting
-- LSP via mason
-- LSP-based autocompletion
+- autocompletion
 - Telescope picker for pydoc/man
 
 ### My stuff

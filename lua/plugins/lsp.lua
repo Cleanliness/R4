@@ -4,28 +4,14 @@
 -- Debugging:
 --   `:checkhealth vim.lsp`
 
-
--- Note: this requires git, curl/wget, unzip, tar, gzip
--- see :h mason-requirements
-
 ------------------------------------------------------
 --                     Helpers
 ------------------------------------------------------
 
-local map = function(type, key, value)
+local keymap = function(type, key, value)
   vim.api.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
 end
 
-local ensure_install = function(servers)
-  local mason_registry = require("mason-registry")
-
-  for _, server in ipairs(servers) do
-    if not mason_registry.is_installed(server) then
-      print("[lsp.lua] installing " .. server)
-      mason_registry.get_package(server):install()
-    end
-  end
-end
 
 ------------------------------------------------------
 --                       lsp
@@ -49,21 +35,21 @@ local init_lsp_highlight_hover = function(args)
 end
 
 
-local function init_lsp_completion(args)
-  local client = vim.lsp.get_client_by_id(args.data.client_id)
-  if not client:supports_method('textDocument/completion') then
-    return
-  end
-
-  vim.lsp.completion.enable(
-    true, client.id, args.buf, {
-      autotrigger = true,
-      convert = function(item)
-        return { abbr = item.label:gsub('%b()', '') }
-      end,
-    }
-  )
-end
+-- local function init_lsp_completion(args)
+--   local client = vim.lsp.get_client_by_id(args.data.client_id)
+--   if not client:supports_method('textDocument/completion') then
+--     return
+--   end
+--
+--   vim.lsp.completion.enable(
+--     true, client.id, args.buf, {
+--       autotrigger = true,
+--       convert = function(item)
+--         return { abbr = item.label:gsub('%b()', '') }
+--       end,
+--     }
+--   )
+-- end
 
 ------------------------------------------------------
 
@@ -72,28 +58,8 @@ local function on_lsp_attach(args)
   -- init_lsp_completion(args)
 
   -- ctrl+O to jump back
-  map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
-  map('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
-end
-
-------------------------------------------------------
---                     Mason
-------------------------------------------------------
--- Easily install LSP/DAP/Linters
-
-local mason_config = function()
-  local config = require('plugins/lsp/lspconfig')
-  local mason = require('mason')
-
-  mason.setup({
-    install_root_dir = config.lsp_path
-  })
-  local success, res = pcall(ensure_install, config.mason_ensure_installed)
-  if not success then
-    print("[lsp.lua] could not ensure lsps are installed", res)
-  end
-
-  config.apply_config()
+  keymap('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
+  keymap('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
 end
 
 ------------------------------------------------------
@@ -102,7 +68,8 @@ end
 -- This will be called after the plugins are loaded
 
 local config = function()
-  mason_config()
+  local config = require('plugins/lsp/lspconfig')
+  config.apply_config()
 
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = on_lsp_attach,

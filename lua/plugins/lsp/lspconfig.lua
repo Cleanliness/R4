@@ -6,29 +6,13 @@ local function join_paths(...)
 end
 
 
--- TODO:
--- Mason's basedpyright and clangd are huge ~280M
--- ensure_installed doesn't wait for mason index to load
-
---------------------------------------------------
-
--- ~/.local/share/nvim/mason/bin
-local LSP_PATH = join_paths(vim.fn.stdpath "data", "mason")
-local BIN_PATH = join_paths(LSP_PATH, "bin")
-
--- servers to ensure are installed
-local MASON_ENSURE_INSTALLED = {
-  "basedpyright",
-  "lua-language-server",
-  "clangd",
-  "vtsls",
-}
-
 --------------------------------------------------
 
 local configs = {
+
+-- LUA
 luals = {
-  cmd = { join_paths(BIN_PATH, "lua-language-server") },
+  cmd = { "lua-language-server" },
   filetypes = {'lua'},
   root_markers = { '.luarc.json', '.luarc.jsonc' },
   settings = {
@@ -38,50 +22,38 @@ luals = {
   }
 },
 
+-- python
 pylsp = {
   cmd = {
-    join_paths(BIN_PATH, "basedpyright-langserver"),
-    "--stdio",
+    "pyrefly",
+    "lsp",
   },
   filetypes = {'python'},
   root_markers = { ".pyproject.toml", "setup.py", "requirements.txt" },
-  settings = {
-    basedpyright = {
-      typeCheckingMode = "basic"
-    }
-  }
 },
 
+-- js
 tsls = {
   cmd = {
-    join_paths(BIN_PATH, "vtsls"),
+    "vtsls",
     "--stdio"
   },
   filetypes = {'typescript', 'javascript'},
   root_markers = {"package.json", "tsconfig.json", "jsconfig.json"},
 },
 
+-- c
 cxxls = {
-  cmd = { join_paths(BIN_PATH, "clangd") },
+  cmd = { "clangd" },
   filetypes = {'c', 'cpp', 'cuda'},
   root_markers = {"Makefile", "CMakeLists.txt"}
 },
 
+-- rust
 rsls = {
-  cmd = { join_paths(BIN_PATH, "rust-analyzer") },
+  cmd = { "rust-analyzer" },
   filetypes = {'rust'},
   root_markers = { "Cargo.toml", "rust-project.json" },
-  -- settings = {
-  --   ['rust-analyzer'] = {
-  --     cargo = {
-  --       allFeatures = true,
-  --       loadOutDirsFromCheck = true,
-  --     },
-  --     procMacro = {
-  --       enable = true,
-  --     },
-  --   }
-  -- }
 }
 
 } -- /configs
@@ -96,7 +68,5 @@ local apply_config = function()
 end
 
 return {
-  lsp_path = LSP_PATH,
   apply_config = apply_config,
-  mason_ensure_installed = MASON_ENSURE_INSTALLED
 }

@@ -16,16 +16,18 @@ local lang_base = {
   "cuda",
   "python",
   "typescript",
+  "markdown",
 }
 
 local config = function()
-  local ts = require('nvim-treesitter.configs')
-  ts.setup({
-    ensure_installed = lang_base,       -- Install the base languages
-    auto_install = false,               -- Auto install parser when entering a file
-    highlight = { enable = true },
-    indent = { enable = true }
-  })
+  local ts = require('nvim-treesitter')
+  ts.install(lang_base)
+  -- ts.setup({
+  --   ensure_installed = lang_base,       -- Install the base languages
+  --   auto_install = false,               -- Auto install parser when entering a file
+  --   highlight = { enable = true },
+  --   indent = { enable = true }
+  -- })
 end
 
 --------------------------------------------------
